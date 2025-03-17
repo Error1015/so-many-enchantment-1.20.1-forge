@@ -1,0 +1,16 @@
+{
+  "enchantment.somanyenchantments.piercing": "符文: 穿刺",
+  "enchantment.somanyenchantments.piercing.desc": "符文附魔之一。每一级都会使你的攻击多25%转化为穿刺伤害。",
+  "enchantment.somanyenchantments.revival": "符文: 重铸",
+  "enchantment.somanyenchantments.revival.desc": "当带有该附魔的工具耐久彻底耗尽后，有一定的概率使你获得一把完全一样的新工具",
+  "enchantment.somanyenchantments.life_steal": "生命窃取",
+  "enchantment.somanyenchantments.life_steal.desc": "根据造成的伤害为你回血，每提升一级生命窃取等级增加2.5%，最多可以恢复造成伤害的10%",
+  "enchantment.somanyenchantments.bless_sword": "祝福之刃",
+  "enchantment.somanyenchantments.bless_sword.desc": "对亡灵生物造成额外伤害，且恢复使用者一定生命值",
+  "enchantment.somanyenchantments.unpredictable": "变幻莫测",
+  "enchantment.somanyenchantments.unpredictable.desc": "你的伤害会上下浮动，甚至可能治疗目标",
+  "enchantment.somanyenchantments.frailty_curse": "脆弱诅咒",
+  "enchantment.somanyenchantments.frailty_curse.desc": "每级将持有者所受的伤害增加40%",
+
+  "death.attack.piercing": "%1$s 被刺成了刺猬"
+}
