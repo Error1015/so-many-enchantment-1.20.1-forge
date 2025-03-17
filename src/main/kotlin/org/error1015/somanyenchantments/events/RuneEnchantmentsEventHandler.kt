@@ -1,9 +1,7 @@
 package org.error1015.somanyenchantments.events
 
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.ItemStack
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -48,8 +46,10 @@ object RuneEnchantmentsEventHandler {
             if (event.item.maxDamage - event.item.damageValue < 30) {
                 // 有（(1+附魔等级) * 15%的概率
                 if (Math.random() <= (1f + level) * 0.15f) {
+                    // TODO("耐久度为一半")
                     player.addItem(event.item)
                 } else if (event.item.maxDamage < 1250 && Math.random() <= (1f + level) * 0.2f) {
+                    // TODO("耐久度为一半")
                     player.addItem(event.item)
                 }
             }

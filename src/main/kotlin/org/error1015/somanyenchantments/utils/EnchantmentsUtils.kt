@@ -45,6 +45,9 @@ fun LivingEntity.getItemEnchantmentLevel(enchantment: Enchantment, slot: Equipme
     }
 }
 
+/**
+ * 获取ItemStack的指定附魔等级
+ */
 fun ItemStack.enchantmentLevel(enchantment: Enchantment) = allEnchantments[enchantment] ?: 0
 
 /**
@@ -56,7 +59,6 @@ fun ItemStack.isItemEnchanted(enchantment: Enchantment) = enchantment in allEnch
  * 如果ItemStack的所有附魔中包含任何附魔则返回true
  */
 fun ItemStack.isItemEnchanted() = allEnchantments.isNotEmpty()
-
 
 /**
  * 获取玩家护甲上的附魔总和
