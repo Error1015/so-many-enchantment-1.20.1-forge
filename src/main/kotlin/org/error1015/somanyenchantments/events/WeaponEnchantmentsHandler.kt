@@ -26,7 +26,7 @@ object WeaponEnchantmentsHandler {
                 val level = mainHandItem.enchantmentLevel(LifeStealEnchantment)
                 if (level == 0) return
                 // 当附魔等级为1级,恢复玩家造成伤害的5% 当附魔等级>1级则恢复玩家造成伤害的5%+等级*0.25
-                var healValue: Float = when (level) {
+                var healValue = when (level) {
                     1 -> event.amount * 0.05f
                     4 -> event.amount * 0.1f // 若凌的额外要求: 四级最高10%
                     else -> event.amount * (0.05f + level * 0.25f)

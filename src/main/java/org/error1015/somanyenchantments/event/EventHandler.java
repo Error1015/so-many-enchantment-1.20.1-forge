@@ -107,7 +107,6 @@ public class EventHandler {
                 }
             }
         }
-
     }
 
     public static Optional<ItemStack> getSmeltingResult(ItemStack input, Level level) {
