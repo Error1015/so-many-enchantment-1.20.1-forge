@@ -6,7 +6,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class AutoSmelt extends Enchantment {
     public AutoSmelt(EquipmentSlot... slots) {
-        super(Enchantment.Rarity.COMMON, EnchantmentCategory.DIGGER, slots);
+        super(Rarity.VERY_RARE, EnchantmentCategory.DIGGER, slots);
     }
 
     @Override
@@ -20,6 +20,6 @@ public class AutoSmelt extends Enchantment {
     }
     @Override
     public boolean isTradeable() {
-        return false;
+        return true;
     }
 }
