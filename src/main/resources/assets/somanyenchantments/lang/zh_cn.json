@@ -16,5 +16,6 @@
   "enchantment.somanyenchantments.better_loot": "高级抢夺",
   "enchantment.somanyenchantments.better_loot.desc": "比抢夺更好",
   "enchantment.somanyenchantments.purification_blade": "净化之刃",
+  "enchantment.somanyenchantments.purification_blade.desc": "有概率触发更高伤害，额外魔法伤害，无敌帧归零，随机清除受击者身上的buff",
   "death.attack.piercing": "%1$s 被刺成了刺猬"
 }
