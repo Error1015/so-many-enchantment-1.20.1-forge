@@ -4,6 +4,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +19,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.error1015.somanyenchantments.enchantments.JavaModEnchantments;
@@ -85,6 +90,24 @@ public class EventHandler {
 
         // 确保方块被破坏
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11); // 11 是破坏方块的 Flag
+    }
+    @SubscribeEvent
+    public void attackEntity(LootingLevelEvent event) {
+        if (event.getDamageSource() != null) {
+            if (event.getDamageSource().getEntity() instanceof LivingEntity livingEntity) {
+                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(JavaModEnchantments.BETTER_LOOT.get());
+                if (betterLoot > 0) {
+                    event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
+                }
+            }
+            else if (event.getDamageSource().getDirectEntity() instanceof LivingEntity livingEntity) {
+                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(JavaModEnchantments.BETTER_LOOT.get());
+                if (betterLoot > 0) {
+                    event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
+                }
+            }
+        }
+
     }
 
     public static Optional<ItemStack> getSmeltingResult(ItemStack input, Level level) {

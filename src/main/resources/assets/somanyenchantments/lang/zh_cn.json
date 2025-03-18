@@ -13,5 +13,7 @@
   "enchantment.somanyenchantments.frailty_curse.desc": "每级将持有者所受的伤害增加40%",
   "enchantment.somanyenchantments.auto_smelt": "自动冶炼",
   "enchantment.somanyenchantments.auto_smelt.desc": "采集方块时，自动烧炼，受时运影响",
+  "enchantment.somanyenchantments.better_loot": "高级抢夺",
+  "enchantment.somanyenchantments.better_loot.desc": "比抢夺更好",
   "death.attack.piercing": "%1$s 被刺成了刺猬"
 }
