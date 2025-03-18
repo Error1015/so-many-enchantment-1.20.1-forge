@@ -11,6 +11,7 @@
   "enchantment.somanyenchantments.unpredictable.desc": "你的伤害会上下浮动，甚至可能治疗目标",
   "enchantment.somanyenchantments.frailty_curse": "脆弱诅咒",
   "enchantment.somanyenchantments.frailty_curse.desc": "每级将持有者所受的伤害增加40%",
-
+  "enchantment.somanyenchantments.auto_smelt": "自动冶炼",
+  "enchantment.somanyenchantments.auto_smelt.desc": "采集方块时，自动烧炼，受时运影响",
   "death.attack.piercing": "%1$s 被刺成了刺猬"
 }
