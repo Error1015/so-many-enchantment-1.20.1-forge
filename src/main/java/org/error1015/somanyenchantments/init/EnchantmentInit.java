@@ -5,7 +5,11 @@ import java.util.List;
 public class EnchantmentInit {
     public static final String autoSmelt = "auto_smelt";
     public static final String betterLoot = "better_loot";
-    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot);
+    public static final String purificationBlade = "purification_blade";
+    public static List<String> allEnchantments = List.of(
+            autoSmelt,
+            betterLoot,
+            purificationBlade);
     private static String defaultConfig;
     public static String getDefaultConfig(String enchantmentName) {
         if (enchantmentName.equals(autoSmelt)) {
@@ -34,6 +38,22 @@ public class EnchantmentInit {
                         "maxLevel":3,
                         "quality":2,
                         "couldEnchantTable":true,
+                        "couldAnvil":true,
+                        "couldTrade":true,
+                        "unableCompatibility":[]
+                    }
+                ]""", enchantmentName);
+        }
+        else if (enchantmentName.equals(purificationBlade)) {
+            defaultConfig = String.format("""
+                [
+                    {
+                        "enchantmentName": "%s",
+                        "isTreasure":true,
+                        "couldFound":false,
+                        "maxLevel":5,
+                        "quality":3,
+                        "couldEnchantTable":false,
                         "couldAnvil":true,
                         "couldTrade":true,
                         "unableCompatibility":[]

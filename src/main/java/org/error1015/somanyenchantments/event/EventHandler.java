@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.error1015.somanyenchantments.enchantments.JavaModEnchantments;
+import org.error1015.somanyenchantments.enchantments.RegisterEnchantments;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class EventHandler {
 
         // 检查是否持有 AutoSmelt 附魔的工具
         ItemStack heldItem = player.getMainHandItem();
-        if (heldItem.getEnchantmentLevel(JavaModEnchantments.AUTO_SMELT.get()) == 0) return;
+        if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) == 0) return;
 
         BlockState state = event.getState();
         Level world = event.getPlayer().level();
@@ -92,13 +92,13 @@ public class EventHandler {
     public void attackEntity(LootingLevelEvent event) {
         if (event.getDamageSource() != null) {
             if (event.getDamageSource().getEntity() instanceof LivingEntity livingEntity) {
-                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(JavaModEnchantments.BETTER_LOOT.get());
+                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.BETTER_LOOT.get());
                 if (betterLoot > 0) {
                     event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
                 }
             }
             else if (event.getDamageSource().getDirectEntity() instanceof LivingEntity livingEntity) {
-                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(JavaModEnchantments.BETTER_LOOT.get());
+                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.BETTER_LOOT.get());
                 if (betterLoot > 0) {
                     event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
                 }
