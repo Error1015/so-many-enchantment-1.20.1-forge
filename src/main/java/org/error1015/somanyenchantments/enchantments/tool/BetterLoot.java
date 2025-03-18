@@ -1,10 +1,12 @@
 package org.error1015.somanyenchantments.enchantments.tool;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.error1015.somanyenchantments.config.EnchantmentsConfig;
 import org.error1015.somanyenchantments.init.EnchantmentInit;
 import org.jetbrains.annotations.NotNull;
@@ -38,5 +40,16 @@ public class BetterLoot extends Enchantment {
     @Override
     public boolean canEnchant(@NotNull ItemStack pStack) {
         return pStack.getItem() instanceof SwordItem && EnchantmentsConfig.couldAnvil(EnchantmentInit.betterLoot);
+    }
+    @Override
+    public boolean checkCompatibility(@NotNull Enchantment pOther) {
+        boolean result = true;
+        for (String location : EnchantmentsConfig.getUnableCompatibility(EnchantmentInit.betterLoot)) {
+            if (pOther == ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(location))) {
+                result = false;
+                break;
+            }
+        }
+        return super.checkCompatibility(pOther) && result;
     }
 }
