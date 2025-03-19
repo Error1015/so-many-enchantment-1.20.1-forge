@@ -7,7 +7,6 @@ import net.minecraft.world.item.SwordItem
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
-import org.error1015.somanyenchantments.Config
 import org.error1015.somanyenchantments.enchantments.weapon.BlessSwordEnchantment
 import org.error1015.somanyenchantments.enchantments.weapon.LifeStealEnchantment
 import org.error1015.somanyenchantments.utils.enchantmentLevel
@@ -18,7 +17,6 @@ object WeaponEnchantmentsHandler {
     @SubscribeEvent
     fun doLifeStealEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (!Config.lifeStealEnchantment.get()) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val mainHandItem = player.getItemBySlot(EquipmentSlot.MAINHAND)
@@ -41,7 +39,6 @@ object WeaponEnchantmentsHandler {
     @SubscribeEvent
     fun doBlessSwordEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        if (!Config.blessSwordEnchantment.get()) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val mainHandItem = player.mainHandItem

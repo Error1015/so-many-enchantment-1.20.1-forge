@@ -1,10 +1,8 @@
 package org.error1015.somanyenchantments.enchantments.runeword
 
-import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 import org.error1015.somanyenchantments.enchantments.ApplicableSlots
+import org.error1015.somanyenchantments.enchantments.BasicEnchantment
+import org.error1015.somanyenchantments.init.EnchantmentInit
 
-object PiercingEnchantment : Enchantment(Rarity.VERY_RARE, EnchantmentCategory.WEAPON, ApplicableSlots.WEAPON) {
-    override fun getMaxLevel() = 4
-}
+object PiercingEnchantment : BasicEnchantment(Rarity.VERY_RARE, EnchantmentCategory.WEAPON, ApplicableSlots.WEAPON, EnchantmentInit.piercing)

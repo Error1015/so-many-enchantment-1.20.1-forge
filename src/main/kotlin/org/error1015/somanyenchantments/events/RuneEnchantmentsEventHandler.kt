@@ -6,7 +6,6 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
-import org.error1015.somanyenchantments.Config
 import org.error1015.somanyenchantments.enchantments.runeword.PiercingEnchantment
 import org.error1015.somanyenchantments.enchantments.runeword.RevivalEnchantment
 import org.error1015.somanyenchantments.utils.enchantmentLevel
@@ -21,8 +20,6 @@ object RuneEnchantmentsEventHandler {
     @SubscribeEvent
     fun doPiercingAttack(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
-        // 如果配置文件已经禁用了此附魔,不执行事件
-        if (!Config.piercingEnchantment.get()) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
             val piercingLevel = player.getItemEnchantmentLevel(PiercingEnchantment, EquipmentSlot.MAINHAND)

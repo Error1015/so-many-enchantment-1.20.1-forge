@@ -1,9 +1,8 @@
 package org.error1015.somanyenchantments.enchantments.runeword
 
-import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 import org.error1015.somanyenchantments.enchantments.ApplicableSlots
+import org.error1015.somanyenchantments.enchantments.BasicEnchantment
+import org.error1015.somanyenchantments.init.EnchantmentInit
 
-object RevivalEnchantment : Enchantment(Rarity.VERY_RARE, EnchantmentCategory.DIGGER, ApplicableSlots.WEAPON) {
-    override fun getMaxLevel() = 2
-}
+object RevivalEnchantment : BasicEnchantment(Rarity.VERY_RARE, EnchantmentCategory.DIGGER, ApplicableSlots.WEAPON, EnchantmentInit.revival)

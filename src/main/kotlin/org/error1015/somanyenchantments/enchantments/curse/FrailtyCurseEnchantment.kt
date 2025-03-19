@@ -1,11 +1,10 @@
 package org.error1015.somanyenchantments.enchantments.curse
 
-import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentCategory
 import org.error1015.somanyenchantments.enchantments.ApplicableSlots
+import org.error1015.somanyenchantments.enchantments.BasicEnchantment
+import org.error1015.somanyenchantments.init.EnchantmentInit
 
-object FrailtyCurseEnchantment : Enchantment(Rarity.UNCOMMON, EnchantmentCategory.ARMOR, ApplicableSlots.ARMOR) {
-    override fun getMaxLevel() = 4
-
+object FrailtyCurseEnchantment : BasicEnchantment(Rarity.UNCOMMON, EnchantmentCategory.ARMOR, ApplicableSlots.ARMOR, EnchantmentInit.frailtyCurse) {
     override fun isCurse() = true
 }
