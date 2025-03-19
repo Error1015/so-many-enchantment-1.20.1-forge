@@ -11,7 +11,7 @@ public class EnchantmentInit {
     public static final String piercing = "piercing";
     public static final String revival = "revival";
     public static final String blessSword = "bless_word";
-    public static final String lifesteal = "lifesteal";
+    public static final String lifeSteal = "life_steal";
 
     public static List<String> allEnchantments = List.of(
             autoSmelt,
@@ -21,14 +21,14 @@ public class EnchantmentInit {
             unpredictable, piercing,
             revival,
             blessSword,
-            lifesteal
+            lifeSteal
     );
 
     private static String defaultConfig;
 
     public static String getDefaultConfig(String enchantmentName) {
-        if (enchantmentName.equals(autoSmelt)) {
-            defaultConfig = String.format("""
+        switch (enchantmentName) {
+            case autoSmelt -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -42,8 +42,7 @@ public class EnchantmentInit {
                             "unableCompatibility":["minecraft:silk_touch"]
                         }
                     ]""", enchantmentName);
-        } else if (enchantmentName.equals(betterLoot)) {
-            defaultConfig = String.format("""
+            case betterLoot -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -57,8 +56,7 @@ public class EnchantmentInit {
                             "unableCompatibility":[]
                         }
                     ]""", enchantmentName);
-        } else if (enchantmentName.equals(purificationBlade)) {
-            defaultConfig = String.format("""
+            case purificationBlade -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -72,8 +70,7 @@ public class EnchantmentInit {
                             "unableCompatibility":[]
                         }
                     ]""", enchantmentName);
-        } else if (enchantmentName.equals(frailtyCurse)) {
-            defaultConfig = String.format("""
+            case frailtyCurse -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -88,8 +85,7 @@ public class EnchantmentInit {
                         }
                     ]
                     """, enchantmentName);
-        } else if (enchantmentName.equals(unpredictable)) {
-            defaultConfig = String.format("""
+            case unpredictable -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -104,8 +100,7 @@ public class EnchantmentInit {
                         }
                     ]
                     """, enchantmentName);
-        } else if (enchantmentName.equals(piercing)) {
-            defaultConfig = String.format("""
+            case piercing -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -120,8 +115,7 @@ public class EnchantmentInit {
                         }
                     ]
                     """, enchantmentName);
-        } else if (enchantmentName.equals(revival)) {
-            defaultConfig = String.format("""
+            case revival -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -136,8 +130,7 @@ public class EnchantmentInit {
                         }
                     ]
                     """, enchantmentName);
-        } else if (enchantmentName.equals(blessSword)) {
-            defaultConfig = String.format("""
+            case blessSword -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",
@@ -152,8 +145,7 @@ public class EnchantmentInit {
                         }
                     ]
                     """, enchantmentName);
-        } else if (enchantmentName.equals(lifesteal)) {
-            defaultConfig = String.format("""
+            case lifeSteal -> defaultConfig = String.format("""
                     [
                         {
                             "enchantmentName": "%s",

@@ -5,4 +5,4 @@ import org.error1015.somanyenchantments.enchantments.ApplicableSlots
 import org.error1015.somanyenchantments.enchantments.BasicEnchantment
 import org.error1015.somanyenchantments.init.EnchantmentInit
 
-object LifeStealEnchantment: BasicEnchantment(Rarity.UNCOMMON, EnchantmentCategory.WEAPON, ApplicableSlots.WEAPON, EnchantmentInit.lifesteal)
+object LifeStealEnchantment: BasicEnchantment(EnchantmentCategory.WEAPON, ApplicableSlots.WEAPON, EnchantmentInit.lifeSteal)

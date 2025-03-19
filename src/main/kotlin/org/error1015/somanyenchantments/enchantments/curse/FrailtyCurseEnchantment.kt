@@ -5,6 +5,6 @@ import org.error1015.somanyenchantments.enchantments.ApplicableSlots
 import org.error1015.somanyenchantments.enchantments.BasicEnchantment
 import org.error1015.somanyenchantments.init.EnchantmentInit
 
-object FrailtyCurseEnchantment : BasicEnchantment(Rarity.UNCOMMON, EnchantmentCategory.ARMOR, ApplicableSlots.ARMOR, EnchantmentInit.frailtyCurse) {
+object FrailtyCurseEnchantment : BasicEnchantment(EnchantmentCategory.ARMOR, ApplicableSlots.ARMOR, EnchantmentInit.frailtyCurse) {
     override fun isCurse() = true
 }

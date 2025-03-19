@@ -7,12 +7,13 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.error1015.somanyenchantments.config.EnchantmentsConfig;
+import org.error1015.somanyenchantments.init.EnchantmentInit;
 import org.jetbrains.annotations.NotNull;
 
 public class BasicEnchantment extends Enchantment {
     private final String enchantName;
-    protected BasicEnchantment(Rarity pRarity, EnchantmentCategory pCategory, EquipmentSlot[] pApplicableSlots, String pName) {
-        super(pRarity, pCategory, pApplicableSlots);
+    protected BasicEnchantment(EnchantmentCategory pCategory, EquipmentSlot[] pApplicableSlots, String pName) {
+        super(EnchantmentsConfig.getRarityByConfig(EnchantmentInit.purificationBlade), pCategory, pApplicableSlots);
         this.enchantName = pName;
     }
 
