@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "org.error1015.somanyenchantments.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "so-many-enchantment.refmap.json",
+  "mixins": [
+    "ReLure",
+    "ReFishLuck"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.7"
+}

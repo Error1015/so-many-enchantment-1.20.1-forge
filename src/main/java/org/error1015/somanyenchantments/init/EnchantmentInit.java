@@ -12,6 +12,8 @@ public class EnchantmentInit {
     public static final String revival = "revival";
     public static final String blessSword = "bless_word";
     public static final String lifeSteal = "life_steal";
+    public static final String betterLure = "better_lure";
+    public static final String betterFishLuck = "better_fish_luck";
 
     public static List<String> allEnchantments = List.of(
             autoSmelt,
@@ -21,7 +23,9 @@ public class EnchantmentInit {
             unpredictable, piercing,
             revival,
             blessSword,
-            lifeSteal
+            lifeSteal,
+            betterLure,
+            betterFishLuck
     );
 
     private static String defaultConfig;
@@ -157,6 +161,36 @@ public class EnchantmentInit {
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":["somanyenchantments:bless_sword"]
+                        }
+                    ]
+                    """, enchantmentName);
+            case betterLure -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":true,
+                            "couldFound":false,
+                            "maxLevel":3,
+                            "quality":2,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":["minecraft:lure"]
+                        }
+                    ]
+                    """, enchantmentName);
+            case betterFishLuck -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":true,
+                            "couldFound":false,
+                            "maxLevel":3,
+                            "quality":2,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
                         }
                     ]
                     """, enchantmentName);
