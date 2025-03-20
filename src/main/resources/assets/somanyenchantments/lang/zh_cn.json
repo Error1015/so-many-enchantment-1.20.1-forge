@@ -1,6 +1,6 @@
 {
   "enchantment.somanyenchantments.piercing": "符文: 穿刺",
-  "enchantment.somanyenchantments.piercing.desc": "符文附魔之一。每一级都会使你的攻击多25%转化为穿刺伤害。",
+  "enchantment.somanyenchantments.piercing.desc": "符文附魔之一。每一级都会使你的攻击多25%转化为穿刺伤害",
   "enchantment.somanyenchantments.revival": "符文: 重铸",
   "enchantment.somanyenchantments.revival.desc": "当带有该附魔的工具耐久彻底耗尽后，有一定的概率使你获得一把完全一样的新工具",
   "enchantment.somanyenchantments.life_steal": "生命窃取",
@@ -23,5 +23,7 @@
   "enchantment.somanyenchantments.better_fish_luck.desc": "更容易掉到好东西",
   "enchantment.somanyenchantments.break_magic": "破法之刃",
   "enchantment.somanyenchantments.break_magic.desc": "根据受击者的状态效果数量增加伤害，对女巫和掠夺者造成的伤害更高",
+  "enchantment.somanyenchantments.sealed_curse": "符文: 密封诅咒",
+  "enchantment.somanyenchantments.sealed_curse.desc": "攻击时有概率会为敌人的装备附上诅咒附魔",
   "death.attack.piercing": "%1$s 被刺成了刺猬"
 }
