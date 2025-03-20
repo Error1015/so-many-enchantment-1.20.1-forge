@@ -60,20 +60,33 @@ object CurseEnchantmentHandler {
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity
             val target = event.entity
+
             // 如果攻击者的主手物品有密封诅咒，则给目标装备一个随机诅咒
             if (attacker.mainHandItem.isItemEnchanted(SealedCurseEnchantment)) {
                 if (Math.random() < 0.2) {
                     val armors = mutableListOf<ItemStack>() // 目标的护甲List
                     target.armorSlots.forEach { armors.add(it) }
-                    val curses = ForgeRegistries.ENCHANTMENTS.asSequence().filter { it.isCurse }.toList() // 已经注册的诅咒附魔
-                    val curseIndex = Random.nextInt(0, curses.size - 1) // 随机诅咒索引
-                    val armorsIndex = Random.nextInt(0, armors.size - 1) // 随机护甲索引
-                    val armor = armors[armorsIndex] // 随机到的护甲
-                    val enchantment = curses[curseIndex] // 随机到的诅咒附魔
-                    val level = Random.nextInt(1, enchantment.maxLevel) // 随机到的附魔等级
-                    val armorEnchantments = EnchantmentHelper.getEnchantments(armor) // 目标护甲的附魔Map
-                    armorEnchantments.plus(enchantment to level) // 添加附魔
-                    EnchantmentHelper.setEnchantments(armorEnchantments, armor) // 修改附魔
+
+                    // 获取所有已注册的诅咒附魔
+                    val curses = ForgeRegistries.ENCHANTMENTS.asSequence().filter { it.isCurse }.toList()
+
+                    // 检查是否有可用的诅咒和护甲
+                    if (curses.isEmpty() || armors.isEmpty()) return
+
+                    // 随机选择诅咒和护甲
+                    val curseIndex = Random.nextInt(0, curses.size) // 这里不需要减1
+                    val armorsIndex = Random.nextInt(0, armors.size) // 这里不需要减1
+                    val armor = armors[armorsIndex]
+                    val enchantment = curses[curseIndex]
+
+                    // 随机选择附魔等级
+                    val level = Random.nextInt(1, enchantment.maxLevel + 1) // 需要加1
+                    val armorEnchantments = EnchantmentHelper.getEnchantments(armor)
+
+                    // 添加附魔并应用到护甲
+                    val updatedEnchantments = armorEnchantments.toMutableMap()
+                    updatedEnchantments[enchantment] = level
+                    EnchantmentHelper.setEnchantments(updatedEnchantments, armor)
                 }
             }
         }

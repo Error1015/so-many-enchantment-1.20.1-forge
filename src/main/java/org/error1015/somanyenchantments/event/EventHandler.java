@@ -49,7 +49,6 @@ public class EventHandler {
 
         // 替换可熔炼的物品
         List<ItemStack> newDrops = new ArrayList<>();
-
         for (ItemStack drop : originalDrops) {
             Optional<ItemStack> oSmelted = getSmeltingResult(drop, world);
             if (oSmelted.isPresent()) {
