@@ -2,6 +2,7 @@ package org.error1015.somanyenchantments.events
 
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraftforge.event.entity.living.LivingAttackEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
@@ -62,7 +63,8 @@ object CurseEnchantmentHandler {
             // 如果攻击者的主手物品有密封诅咒，则给目标装备一个随机诅咒
             if (attacker.mainHandItem.isItemEnchanted(SealedCurseEnchantment)) {
                 if (Math.random() < 0.2) {
-                    val armors = listOf(target.helmet, target.chestplate, target.leggings, target.boots) // 目标的护甲List
+                    val armors = mutableListOf<ItemStack>() // 目标的护甲List
+                    target.armorSlots.forEach { armors.add(it) }
                     val curses = ForgeRegistries.ENCHANTMENTS.asSequence().filter { it.isCurse }.toList() // 已经注册的诅咒附魔
                     val curseIndex = Random.nextInt(0, curses.size - 1) // 随机诅咒索引
                     val armorsIndex = Random.nextInt(0, armors.size - 1) // 随机护甲索引
