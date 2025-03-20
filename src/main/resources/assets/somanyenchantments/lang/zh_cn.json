@@ -21,5 +21,7 @@
   "enchantment.somanyenchantments.better_lure.desc": "更快的钓鱼速度",
   "enchantment.somanyenchantments.better_fish_luck": "高级海之眷顾",
   "enchantment.somanyenchantments.better_fish_luck.desc": "更容易掉到好东西",
+  "enchantment.somanyenchantments.break_magic": "破法之刃",
+  "enchantment.somanyenchantments.break_magic.desc": "根据受击者的状态效果数量增加伤害，对女巫和掠夺者造成的伤害更高",
   "death.attack.piercing": "%1$s 被刺成了刺猬"
 }

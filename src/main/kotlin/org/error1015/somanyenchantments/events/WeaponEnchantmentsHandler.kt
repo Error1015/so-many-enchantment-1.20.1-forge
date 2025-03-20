@@ -1,13 +1,17 @@
 package org.error1015.somanyenchantments.events
 
 import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobType
+import net.minecraft.world.entity.monster.Ravager
+import net.minecraft.world.entity.monster.Witch
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.SwordItem
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import org.error1015.somanyenchantments.enchantments.weapon.BlessSwordEnchantment
+import org.error1015.somanyenchantments.enchantments.weapon.BreakMagicEnchantment
 import org.error1015.somanyenchantments.enchantments.weapon.LifeStealEnchantment
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
@@ -49,6 +53,25 @@ object WeaponEnchantmentsHandler {
             // 当目标为亡灵时,伤害增加0.6×等级+1, 伤害提升到原本的(4%×魔咒等级)+100%
             if (event.entity.mobType == MobType.UNDEAD && mainHandItem.item is SwordItem) {
                 event.amount += 0.6f * level + 1f + (event.amount * 0.04f * level + 1)
+            }
+        }
+    }
+
+    @SubscribeEvent
+    fun doBreakMagicEvent(event: LivingDamageEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.source.entity is LivingEntity) {
+            val attacker = event.source.entity as LivingEntity
+            val target = event.entity
+            val enchantmentLevel = attacker.mainHandItem.enchantmentLevel(BreakMagicEnchantment)
+            if (enchantmentLevel == 0) return
+            if (target.activeEffects.isEmpty()) return
+            val count = target.activeEffects.size
+            // 如果目标为女巫或者袭击者 伤害加成1.5 * 等级 其他目标伤害加成0.625 * 等级 * effectCount
+            event.amount += when (target) {
+                is Witch -> 1.5f * enchantmentLevel
+                is Ravager -> 1.5f * enchantmentLevel
+                else -> 0.625f * count * enchantmentLevel
             }
         }
     }

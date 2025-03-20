@@ -14,19 +14,10 @@ public class EnchantmentInit {
     public static final String lifeSteal = "life_steal";
     public static final String betterLure = "better_lure";
     public static final String betterFishLuck = "better_fish_luck";
+    public static final String breakMagic = "break_magic";
+    public static final String sealedCurse = "sealed_curse";
 
-    public static List<String> allEnchantments = List.of(
-            autoSmelt,
-            betterLoot,
-            purificationBlade,
-            frailtyCurse,
-            unpredictable, piercing,
-            revival,
-            blessSword,
-            lifeSteal,
-            betterLure,
-            betterFishLuck
-    );
+    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse);
 
     private static String defaultConfig;
 
@@ -187,6 +178,38 @@ public class EnchantmentInit {
                             "couldFound":false,
                             "maxLevel":3,
                             "quality":2,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case breakMagic -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":true,
+                            "couldFound":false,
+                            "maxLevel":5,
+                            "quality":2,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":["somanyenchantments:bless_word"]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case sealedCurse -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":true,
+                            "couldFound":false,
+                            "maxLevel":1,
+                            "quality":3,
                             "couldEnchantTable":false,
                             "couldAnvil":true,
                             "couldTrade":true,

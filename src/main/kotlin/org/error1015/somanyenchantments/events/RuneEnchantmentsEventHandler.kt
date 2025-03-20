@@ -41,13 +41,13 @@ object RuneEnchantmentsEventHandler {
 
             // 如果耐久值小于30,则有一定概率触发
             if (event.item.maxDamage - event.item.damageValue < 30) {
+                val itemCopy = event.item.copy()
+                itemCopy.damageValue = event.item.maxDamage / 2
                 // 有（(1+附魔等级) * 15%的概率
                 if (Math.random() <= (1f + level) * 0.15f) {
-                    // TODO("耐久度为一半")
-                    player.addItem(event.item)
+                    player.addItem(itemCopy)
                 } else if (event.item.maxDamage < 1250 && Math.random() <= (1f + level) * 0.2f) {
-                    // TODO("耐久度为一半")
-                    player.addItem(event.item)
+                    player.addItem(itemCopy)
                 }
             }
         }
