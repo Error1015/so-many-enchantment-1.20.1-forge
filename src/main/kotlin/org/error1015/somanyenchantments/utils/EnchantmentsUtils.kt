@@ -70,6 +70,7 @@ fun LivingEntity.getArmorEnchantmentsSum(enchantment: Enchantment) =
 
 /**
  * 给ItemStack添加附魔
+ * @param value 添加附魔的键值对
  */
 fun ItemStack.addEnchantments(value: Pair<Enchantment, Int>) {
     val enchantments = EnchantmentHelper.getEnchantments(this)
