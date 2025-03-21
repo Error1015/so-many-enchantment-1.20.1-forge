@@ -1,16 +1,24 @@
 package org.error1015.somanyenchantments.events
 
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.EnchantmentCategory
+import net.minecraftforge.event.entity.EntityJoinLevelEvent
 import net.minecraftforge.event.entity.living.LivingAttackEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
-import org.error1015.somanyenchantments.enchantments.curse.*
-import org.error1015.somanyenchantments.utils.*
+import org.error1015.somanyenchantments.enchantments.curse.FrailtyCurseEnchantment
+import org.error1015.somanyenchantments.enchantments.curse.RottenCurseEnchantment
+import org.error1015.somanyenchantments.enchantments.curse.SealedCurseEnchantment
+import org.error1015.somanyenchantments.enchantments.curse.UnpredictableEnchantment
+import org.error1015.somanyenchantments.utils.addEnchantments
+import org.error1015.somanyenchantments.utils.enchantmentLevel
+import org.error1015.somanyenchantments.utils.getAllArmorsEnchantmentsTotalLevel
+import org.error1015.somanyenchantments.utils.isItemEnchanted
 import kotlin.random.Random
 
 @Mod.EventBusSubscriber
@@ -74,6 +82,20 @@ object CurseEnchantmentHandler {
                     // 添加附魔并应用到护甲
                     armor.addEnchantments(enchantment to level)
                 }
+            }
+        }
+    }
+
+    /**
+     * 腐朽诅咒
+     */
+    @SubscribeEvent
+    fun doRottenCurseEnchantmentEvent(event: EntityJoinLevelEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.entity is ItemEntity) {
+            val itemEntity = event.entity as ItemEntity
+            if (itemEntity.item.isItemEnchanted(RottenCurseEnchantment)) {
+                itemEntity.lifespan = 200 // 设置成10秒
             }
         }
     }

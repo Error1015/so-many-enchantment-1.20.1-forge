@@ -19,8 +19,10 @@ public class EnchantmentInit {
     public static final String magicProtection = "magic_protection";
     public static final String clearSkyLoveSong = "clear_sky_love_song";
     public static final String rainBlessing = "rain_blessing";
+    public static final String physicsProtection = "physic_protection";
+    public static final String rottenCurse = "rotten_curse";
 
-    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse, magicProtection, rainBlessing, clearSkyLoveSong);
+    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse, magicProtection, rainBlessing, clearSkyLoveSong, physicsProtection, rottenCurse);
 
     private static String defaultConfig;
 
@@ -265,6 +267,38 @@ public class EnchantmentInit {
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":["somanyenchantments:clear_sky_love_song"]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case physicsProtection -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":false,
+                            "couldFound":true,
+                            "maxLevel":4,
+                            "quality":2,
+                            "couldEnchantTable":true,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case rottenCurse -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":true,
+                            "couldFound":true,
+                            "maxLevel":1,
+                            "quality":3,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
                         }
                     ]
                     """, enchantmentName);

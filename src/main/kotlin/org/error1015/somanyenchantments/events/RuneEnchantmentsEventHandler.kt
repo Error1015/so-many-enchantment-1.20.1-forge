@@ -24,8 +24,7 @@ object RuneEnchantmentsEventHandler {
             val player = event.source.entity as Player
             val piercingLevel = player.getItemEnchantmentLevel(PiercingEnchantment, EquipmentSlot.MAINHAND)
             if (piercingLevel == 0) return
-            event.amount *= piercingLevel * 0.25f
-            TODO("转化为穿刺伤害")
+            TODO()
         }
     }
 

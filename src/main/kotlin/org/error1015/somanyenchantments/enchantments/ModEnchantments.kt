@@ -26,6 +26,7 @@ object ModEnchantments {
     val Unpredictable by Enchantments.registerObject("unpredictable") { UnpredictableEnchantment }
     val FrailtyCurse by Enchantments.registerObject("frailty_curse") { FrailtyCurseEnchantment }
     val SealedCurse by Enchantments.registerObject(EnchantmentInit.sealedCurse) { SealedCurseEnchantment }
+    val RottenCurse by Enchantments.registerObject(EnchantmentInit.rottenCurse) { RottenCurseEnchantment }
     // 保护
     val MagicProtection by Enchantments.registerObject(EnchantmentInit.magicProtection) { MagicProtectionEnchantment }
     // 天气

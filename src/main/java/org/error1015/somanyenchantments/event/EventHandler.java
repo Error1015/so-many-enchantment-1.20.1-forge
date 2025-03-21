@@ -33,6 +33,9 @@ import java.util.Optional;
 import java.util.Random;
 
 public class EventHandler {
+    /**
+     * 自动冶炼
+     */
     @SubscribeEvent
     public void onBlockBreak(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
@@ -92,6 +95,10 @@ public class EventHandler {
         // 确保方块被破坏
         world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11); // 11 是破坏方块的 Flag
     }
+
+    /**
+     * 高级抢夺
+     */
     @SubscribeEvent
     public void attackEntity(LootingLevelEvent event) {
         if (event.getDamageSource() != null) {

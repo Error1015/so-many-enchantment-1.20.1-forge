@@ -30,5 +30,9 @@
   "enchantment.somanyenchantments.clear_sky_love_song": "碧空恋歌",
   "enchantment.somanyenchantments.clear_sky_love_song.desc": "在晴天时为你增加伤害，反之降低伤害，每次攻击都有概率把天气转换为晴天，若有遮挡则不触发",
   "enchantment.somanyenchantments.rain_blessing": "露雨恩赐",
-  "enchantment.somanyenchantments.rain_blessing.desc": "在雨天时增加伤害，反之降低伤害，每次攻击都有概率转换天气为雨天，若有遮挡则不触发"
+  "enchantment.somanyenchantments.rain_blessing.desc": "在雨天时增加伤害，反之降低伤害，每次攻击都有概率转换天气为雨天，若有遮挡则不触发",
+  "enchantment.somanyenchantments.physic_protection": "物理保护",
+  "enchantment.somanyenchantments.physic_protection.desc": "降低受到近战攻击的伤害",
+  "enchantment.somanyenchantments.rotten_curse": "脆弱诅咒",
+  "enchantment.somanyenchantments.rotten_curse.desc": "物品掉落在地上将会很快消失。"
 }
