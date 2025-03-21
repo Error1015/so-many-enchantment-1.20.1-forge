@@ -25,5 +25,11 @@
   "enchantment.somanyenchantments.break_magic.desc": "根据受击者的状态效果数量增加伤害，对女巫和掠夺者造成的伤害更高",
   "enchantment.somanyenchantments.sealed_curse": "符文: 密封诅咒",
   "enchantment.somanyenchantments.sealed_curse.desc": "攻击时有概率会为敌人的装备附上诅咒附魔",
+  "enchantment.somanyenchantments.magic_protection": "魔法保护",
+  "enchantment.somanyenchantments.magic_protection.desc": "降低魔法对你造成的伤害",
+  "enchantment.somanyenchantments.magic_protection": "碧空恋歌",
+  "enchantment.somanyenchantments.magic_protection.desc": "在晴天时为你增加伤害,反之降低伤害,若有遮挡则不触发",
+  "enchantment.somanyenchantments.rain_blessing": "露雨恩赐",
+  "enchantment.somanyenchantments.rain_blessing.desc": "在雨天时增加伤害,反之降低伤害,每次攻击都有概率转换天气为雨天,若有遮挡则不触发",
   "death.attack.piercing": "%1$s 被刺成了刺猬"
 }

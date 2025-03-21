@@ -16,8 +16,11 @@ public class EnchantmentInit {
     public static final String betterFishLuck = "better_fish_luck";
     public static final String breakMagic = "break_magic";
     public static final String sealedCurse = "sealed_curse";
+    public static final String magicProtection = "magic_protection";
+    public static final String clearSkyLoveSong = "clear_sky_love_song";
+    public static final String rainBlessing = "rain_blessing";
 
-    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse);
+    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse, magicProtection, rainBlessing);
 
     private static String defaultConfig;
 
@@ -214,6 +217,54 @@ public class EnchantmentInit {
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":[]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case magicProtection -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":false,
+                            "couldFound":true,
+                            "maxLevel":5,
+                            "quality":2,
+                            "couldEnchantTable":true,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case clearSkyLoveSong -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":false,
+                            "couldFound":false,
+                            "maxLevel":6,
+                            "quality":2,
+                            "couldEnchantTable":true,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":["somanyenchantments:rain_blessing"]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case rainBlessing -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":false,
+                            "couldFound":false,
+                            "maxLevel":6,
+                            "quality":2,
+                            "couldEnchantTable":true,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":["somanyenchantments:clear_sky_love_song"]
                         }
                     ]
                     """, enchantmentName);

@@ -9,25 +9,25 @@ import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentHelper
 
 var LivingEntity.helmet: ItemStack
-    get() = this.getItemBySlot(HEAD)
-    set(value) = this.setItemSlot(HEAD, value)
+    get() = getItemBySlot(HEAD)
+    set(value) = setItemSlot(HEAD, value)
 
 var LivingEntity.chestplate: ItemStack
-    get() = this.getItemBySlot(CHEST)
+    get() = getItemBySlot(CHEST)
     set(value) {
-        this.setItemSlot(CHEST, value)
+        setItemSlot(CHEST, value)
     }
 
 var LivingEntity.leggings: ItemStack
-    get() = this.getItemBySlot(LEGS)
+    get() = getItemBySlot(LEGS)
     set(value) {
-        this.setItemSlot(LEGS, value)
+        setItemSlot(LEGS, value)
     }
 
 var LivingEntity.boots: ItemStack
-    get() = this.getItemBySlot(FEET)
+    get() = getItemBySlot(FEET)
     set(value) {
-        this.setItemSlot(FEET, value)
+        setItemSlot(FEET, value)
     }
 
 /**
@@ -63,12 +63,6 @@ fun ItemStack.isItemEnchanted(enchantment: Enchantment) = enchantment in allEnch
 fun ItemStack.isItemEnchanted() = allEnchantments.isNotEmpty()
 
 /**
- * 获取玩家护甲上的附魔总和
- */
-fun LivingEntity.getArmorEnchantmentsSum(enchantment: Enchantment) =
-    helmet.enchantmentLevel(enchantment) + chestplate.enchantmentLevel(enchantment) + leggings.enchantmentLevel(enchantment) + boots.enchantmentLevel(enchantment)
-
-/**
  * 给ItemStack添加附魔
  * @param value 添加附魔的键值对
  */
@@ -81,11 +75,19 @@ fun ItemStack.addEnchantments(value: Pair<Enchantment, Int>) {
 /**
  * 获取玩家背包所有带有某个附魔的物品
  */
-fun Player.getItemFromEnchantment(enchantment: Enchantment) =
-    inventory.items.asSequence().filter { it.isItemEnchanted(enchantment) }
+fun Player.getItemFromEnchantment(enchantment: Enchantment) = inventory.items.asSequence().filter { it.isItemEnchanted(enchantment) }
 
 /**
  * 获取玩家背包中所有附魔物品
  */
-fun Player.getAllEnchantmentItems() =
-    inventory.items.asSequence().filter { it.isItemEnchanted() }
+fun Player.getAllEnchantmentItems() = inventory.items.asSequence().filter { it.isItemEnchanted() }
+
+/**
+ * 获取玩家护甲栏的所有装备的某一附魔等级总和
+ */
+fun LivingEntity.getAllArmorsEnchantmentsTotalLevel(enchantment: Enchantment): Int {
+    if (armorSlots.all { it.isEmpty }) return 0
+    var level = 0
+    armorSlots.asSequence().filter { it.isItemEnchanted(enchantment) }.forEach { level += it.enchantmentLevel(enchantment) }
+    return level
+}

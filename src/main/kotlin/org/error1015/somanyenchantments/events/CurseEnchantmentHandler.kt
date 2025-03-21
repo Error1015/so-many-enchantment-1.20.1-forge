@@ -9,13 +9,8 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
-import org.error1015.somanyenchantments.enchantments.curse.FrailtyCurseEnchantment
-import org.error1015.somanyenchantments.enchantments.curse.SealedCurseEnchantment
-import org.error1015.somanyenchantments.enchantments.curse.UnpredictableEnchantment
+import org.error1015.somanyenchantments.enchantments.curse.*
 import org.error1015.somanyenchantments.utils.*
-import org.error1015.somanyenchantments.utils.enchantmentLevel
-import org.error1015.somanyenchantments.utils.getArmorEnchantmentsSum
-import org.error1015.somanyenchantments.utils.isItemEnchanted
 import kotlin.random.Random
 
 @Mod.EventBusSubscriber
@@ -45,7 +40,7 @@ object CurseEnchantmentHandler {
         if (event.entity.level().isClientSide) return
         if (event.entity is Player) {
             val player = event.entity as Player
-            val level = player.getArmorEnchantmentsSum(FrailtyCurseEnchantment)
+            val level = player.getAllArmorsEnchantmentsTotalLevel(FrailtyCurseEnchantment)
             if (level == 0) return
             event.amount += level * 0.4f
         }
