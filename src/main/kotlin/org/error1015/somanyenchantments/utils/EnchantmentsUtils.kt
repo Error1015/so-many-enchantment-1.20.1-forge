@@ -3,8 +3,10 @@ package org.error1015.somanyenchantments.utils
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.EquipmentSlot.*
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantment
+import net.minecraft.world.item.enchantment.EnchantmentHelper
 
 var LivingEntity.helmet: ItemStack
     get() = this.getItemBySlot(HEAD)
@@ -65,3 +67,24 @@ fun ItemStack.isItemEnchanted() = allEnchantments.isNotEmpty()
  */
 fun LivingEntity.getArmorEnchantmentsSum(enchantment: Enchantment) =
     helmet.enchantmentLevel(enchantment) + chestplate.enchantmentLevel(enchantment) + leggings.enchantmentLevel(enchantment) + boots.enchantmentLevel(enchantment)
+
+/**
+ * 给ItemStack添加附魔
+ */
+fun ItemStack.addEnchantments(value: Pair<Enchantment, Int>) {
+    val enchantments = EnchantmentHelper.getEnchantments(this)
+    enchantments += value
+    EnchantmentHelper.setEnchantments(enchantments, this)
+}
+
+/**
+ * 获取玩家背包所有带有某个附魔的物品
+ */
+fun Player.getItemFromEnchantment(enchantment: Enchantment) =
+    inventory.items.asSequence().filter { it.isItemEnchanted(enchantment) }
+
+/**
+ * 获取玩家背包中所有附魔物品
+ */
+fun Player.getAllEnchantmentItems() =
+    inventory.items.asSequence().filter { it.isItemEnchanted() }
