@@ -25,6 +25,8 @@ import kotlin.random.Random
 
 @Mod.EventBusSubscriber
 object WeaponEnchantmentsHandler {
+    val debuffs = ForgeRegistries.MOB_EFFECTS.asSequence().filter { it.category == MobEffectCategory.HARMFUL }.toList()
+
     @SubscribeEvent
     fun doLifeStealEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
@@ -128,8 +130,6 @@ object WeaponEnchantmentsHandler {
             val target = event.entity ?: return
             val level = attacker.mainHandItem.enchantmentLevel(MagicBlessEnchantment)
             if (level == 0) return
-            // 获取已经注册的Debuff
-            val debuffs = ForgeRegistries.MOB_EFFECTS.asSequence().filter { it.category == MobEffectCategory.HARMFUL }.toList()
             // 生成随机Debuff 持续时间和等级
             val debuffIndex = Random.nextInt(0, debuffs.size)
             val debuff = debuffs[debuffIndex]

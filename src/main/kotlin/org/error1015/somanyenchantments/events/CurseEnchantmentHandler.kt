@@ -23,6 +23,8 @@ import kotlin.random.Random
 
 @Mod.EventBusSubscriber
 object CurseEnchantmentHandler {
+    val curses = ForgeRegistries.ENCHANTMENTS.asSequence().filter { it.isCurse && it.category == EnchantmentCategory.ARMOR }.toList()
+
     @SubscribeEvent
     fun doUnpredictableEnchantmentEvent(event: LivingDamageEvent) {
         if (event.entity.level().isClientSide) return
@@ -69,7 +71,6 @@ object CurseEnchantmentHandler {
                     val armors = mutableListOf<ItemStack>() // 目标的护甲List
                     target.armorSlots.forEach { armors.add(it) }
                     // 获取所有已注册的诅咒附魔
-                    val curses = ForgeRegistries.ENCHANTMENTS.asSequence().filter { it.isCurse && it.category == EnchantmentCategory.ARMOR }.toList()
                     // 检查是否有可用的诅咒和护甲
                     if (curses.isEmpty() || armors.isEmpty()) return
                     // 随机选择诅咒和护甲
