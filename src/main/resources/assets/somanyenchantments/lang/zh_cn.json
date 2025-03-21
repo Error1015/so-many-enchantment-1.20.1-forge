@@ -34,5 +34,7 @@
   "enchantment.somanyenchantments.physic_protection": "物理保护",
   "enchantment.somanyenchantments.physic_protection.desc": "降低受到近战攻击的伤害",
   "enchantment.somanyenchantments.rotten_curse": "脆弱诅咒",
-  "enchantment.somanyenchantments.rotten_curse.desc": "物品掉落在地上将会很快消失。"
+  "enchantment.somanyenchantments.rotten_curse.desc": "物品掉落在地上将会很快消失。",
+  "enchantment.somanyenchantments.piercing_arrow": "符文：穿刺之箭",
+  "enchantment.somanyenchantments.piercing_arrow.desc": "让箭矢可以无视敌方护甲，每级增加25%的护甲穿透。"
 }

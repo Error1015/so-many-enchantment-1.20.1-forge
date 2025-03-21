@@ -8,7 +8,6 @@ public class EnchantmentInit {
     public static final String purificationBlade = "purification_blade";
     public static final String frailtyCurse = "frailty_curse";
     public static final String unpredictable = "unpredictable";
-    public static final String piercing = "piercing";
     public static final String revival = "revival";
     public static final String blessSword = "bless_word";
     public static final String lifeSteal = "life_steal";
@@ -22,7 +21,25 @@ public class EnchantmentInit {
     public static final String physicsProtection = "physic_protection";
     public static final String rottenCurse = "rotten_curse";
 
-    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse, magicProtection, rainBlessing, clearSkyLoveSong, physicsProtection, rottenCurse);
+    public static List<String> allEnchantments = List.of(
+            autoSmelt,
+            betterLoot,
+            purificationBlade,
+            frailtyCurse,
+            unpredictable,
+            revival,
+            blessSword,
+            lifeSteal,
+            betterLure,
+            betterFishLuck,
+            breakMagic,
+            sealedCurse,
+            magicProtection,
+            rainBlessing,
+            clearSkyLoveSong,
+            physicsProtection,
+            rottenCurse
+    );
 
     private static String defaultConfig;
 
@@ -100,21 +117,7 @@ public class EnchantmentInit {
                         }
                     ]
                     """, enchantmentName);
-            case piercing -> defaultConfig = String.format("""
-                    [
-                        {
-                            "enchantmentName": "%s",
-                            "isTreasure":true,
-                            "couldFound":false,
-                            "maxLevel":4,
-                            "quality":3,
-                            "couldEnchantTable":true,
-                            "couldAnvil":true,
-                            "couldTrade":true,
-                            "unableCompatibility":[]
-                        }
-                    ]
-                    """, enchantmentName);
+
             case revival -> defaultConfig = String.format("""
                     [
                         {

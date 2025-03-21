@@ -1,6 +1,5 @@
 package org.error1015.somanyenchantments.mixin;
 
-import net.minecraft.data.loot.packs.VanillaFishingLoot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;

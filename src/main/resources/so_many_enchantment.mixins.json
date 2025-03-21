@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "so-many-enchantment.refmap.json",
   "mixins": [
-    "ReLure",
-    "ReFishLuck"
+    "ReFishLuck",
+    "ReLure"
   ],
   "client": [
   ],

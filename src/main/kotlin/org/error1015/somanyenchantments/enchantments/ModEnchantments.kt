@@ -15,8 +15,7 @@ import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModEnchantments {
     val Enchantments: DeferredRegister<Enchantment> = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MODID)
-    // 符文
-    val Piercing by Enchantments.registerObject("piercing") { PiercingEnchantment }
+
     val Revival by Enchantments.registerObject("revival") { RevivalEnchantment }
     // 战斗
     val LifeSteal by Enchantments.registerObject("life_steal") { LifeStealEnchantment }

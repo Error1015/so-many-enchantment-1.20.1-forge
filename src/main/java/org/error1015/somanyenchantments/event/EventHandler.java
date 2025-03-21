@@ -58,20 +58,19 @@ public class EventHandler {
                 ItemStack smelted = oSmelted.get();
                 if (!smelted.isEmpty()) {
                     int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE, player);
-                        double a = fortune + 2;
-                        double rn = Math.random();
-                        if (rn >= 1/a) {
-                            int b = (int) (rn * (fortune+1));
-                            for (int i = 0; i < b; i++) {
-                                newDrops.add(smelted.copy());
-                            }
+                    double a = fortune + 2;
+                    double rn = Math.random();
+                    if (rn >= 1 / a) {
+                        int b = (int) (rn * (fortune + 1));
+                        for (int i = 0; i < b; i++) {
+                            newDrops.add(smelted.copy());
                         }
+                    }
                     newDrops.add(smelted.copy());
                 } else {
                     newDrops.add(drop);
                 }
-            }
-            else {
+            } else {
                 newDrops.add(drop);
             }
         }
@@ -81,13 +80,7 @@ public class EventHandler {
         for (ItemStack stack : newDrops) {
             if (!stack.isEmpty()) {
                 // 创建物品实体并添加到世界
-                ItemEntity itemEntity = new ItemEntity(
-                        world,
-                        pos.getX() + 0.5D,
-                        pos.getY() + 0.5D,
-                        pos.getZ() + 0.5D,
-                        stack
-                );
+                ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack);
                 world.addFreshEntity(itemEntity);
             }
         }
@@ -107,8 +100,7 @@ public class EventHandler {
                 if (betterLoot > 0) {
                     event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
                 }
-            }
-            else if (event.getDamageSource().getDirectEntity() instanceof LivingEntity livingEntity) {
+            } else if (event.getDamageSource().getDirectEntity() instanceof LivingEntity livingEntity) {
                 int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.BETTER_LOOT.get());
                 if (betterLoot > 0) {
                     event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
@@ -117,6 +109,9 @@ public class EventHandler {
         }
     }
 
+    /**
+     * 净化之刃
+     */
     @SubscribeEvent
     public void onLivingAttack(LivingHurtEvent event) {
         LivingEntity targetedEntity = event.getEntity();
@@ -130,6 +125,11 @@ public class EventHandler {
         applyPurificationBladeEffect(targetedEntity, level, damageSource, attacker, event);
     }
 
+    /**
+     * 获取攻击者
+     * @param damageSource 伤害来源
+     * @return 造成伤害的实体
+     */
     private LivingEntity getAttacker(DamageSource damageSource) {
         if (damageSource.getEntity() instanceof LivingEntity attacker) {
             return attacker;
@@ -144,9 +144,7 @@ public class EventHandler {
         ItemStack handItem = attacker.getMainHandItem();
         int purificationBladeLevel = handItem.getEnchantmentLevel(RegisterEnchantments.PURIFICATION_BLADE.get());
 
-        if (purificationBladeLevel > 0
-                && !damageSource.is(DamageTypes.INDIRECT_MAGIC)
-                && !damageSource.is(DamageTypes.MAGIC)) {
+        if (purificationBladeLevel > 0 && !damageSource.is(DamageTypes.INDIRECT_MAGIC) && !damageSource.is(DamageTypes.MAGIC)) {
 
             double probability = Math.max(0.0, Math.min(1.0, 0.9 - purificationBladeLevel * 0.06));
             if (RANDOM.nextDouble() > probability) {
@@ -160,7 +158,7 @@ public class EventHandler {
             targetedEntity.invulnerableTime = 0; // 确保无敌帧被重置
             targetedEntity.hurt(level.damageSources().indirectMagic(attacker, attacker), purificationBladeLevel * 0.75f + 1.25f);
 
-            //下一次攻击无视无敌帧
+            // 下一次攻击无视无敌帧
             targetedEntity.invulnerableTime = 0;
 
             // 随机清理 Buff
@@ -172,6 +170,12 @@ public class EventHandler {
         }
     }
 
+    /**
+     * 获取熔炼结果
+     * @param input 输入物品
+     * @param level Level
+     * @return Optional<ItemStack>
+     */
     public static Optional<ItemStack> getSmeltingResult(ItemStack input, Level level) {
         RecipeManager recipeManager = level.getRecipeManager();
         RegistryAccess registryAccess = level.registryAccess();

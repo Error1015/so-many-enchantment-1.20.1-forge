@@ -34,5 +34,7 @@
   "enchantment.somanyenchantments.physic_protection": "Physic Protection",
   "enchantment.somanyenchantments.physic_protection.desc": "Reduces damage taken from melee attacks",
   "enchantment.somanyenchantments.rotten_curse": "Rotten Curse",
-  "enchantment.somanyenchantments.rotten_curse.desc": "Items will quickly disappear when dropped on the ground."
+  "enchantment.somanyenchantments.rotten_curse.desc": "Items will quickly disappear when dropped on the ground.",
+  "enchantment.somanyenchantments.piercing_arrow": "Rune：Piercing Arrow",
+  "enchantment.somanyenchantments.piercing_arrow.desc": "Allows arrows to ignore enemy armor, increasing armor penetration by 25% per level."
 }
