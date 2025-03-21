@@ -1,6 +1,6 @@
 {
   "enchantment.somanyenchantments.piercing": "符文: 穿刺",
-  "enchantment.somanyenchantments.piercing.desc": "符文附魔之一。每一级都会使你的攻击多25%转化为穿刺伤害",
+  "enchantment.somanyenchantments.piercing.desc": "每一级都会使你的攻击多25%转化为穿刺伤害",
   "enchantment.somanyenchantments.revival": "符文: 重铸",
   "enchantment.somanyenchantments.revival.desc": "当带有该附魔的工具耐久彻底耗尽后，有一定的概率使你获得一把完全一样的新工具",
   "enchantment.somanyenchantments.life_steal": "生命窃取",
@@ -27,9 +27,8 @@
   "enchantment.somanyenchantments.sealed_curse.desc": "攻击时有概率会为敌人的装备附上诅咒附魔",
   "enchantment.somanyenchantments.magic_protection": "魔法保护",
   "enchantment.somanyenchantments.magic_protection.desc": "降低魔法对你造成的伤害",
-  "enchantment.somanyenchantments.magic_protection": "碧空恋歌",
-  "enchantment.somanyenchantments.magic_protection.desc": "在晴天时为你增加伤害,反之降低伤害,若有遮挡则不触发",
+  "enchantment.somanyenchantments.clear_sky_love_song": "碧空恋歌",
+  "enchantment.somanyenchantments.clear_sky_love_song.desc": "在晴天时为你增加伤害，反之降低伤害，每次攻击都有概率把天气转换为晴天，若有遮挡则不触发",
   "enchantment.somanyenchantments.rain_blessing": "露雨恩赐",
-  "enchantment.somanyenchantments.rain_blessing.desc": "在雨天时增加伤害,反之降低伤害,每次攻击都有概率转换天气为雨天,若有遮挡则不触发",
-  "death.attack.piercing": "%1$s 被刺成了刺猬"
+  "enchantment.somanyenchantments.rain_blessing.desc": "在雨天时增加伤害，反之降低伤害，每次攻击都有概率转换天气为雨天，若有遮挡则不触发"
 }

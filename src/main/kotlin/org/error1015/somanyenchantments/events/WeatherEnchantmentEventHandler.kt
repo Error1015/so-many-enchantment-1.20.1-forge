@@ -1,5 +1,6 @@
 package org.error1015.somanyenchantments.events
 
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.LivingEntity
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -22,10 +23,14 @@ object WeatherEnchantmentEventHandler {
             val level = attacker.mainHandItem.enchantmentLevel(ClearSkyLoveSongEnchantment)
             if (level == 0) return
             if (!attacker.level().canSeeSky(attacker.blockPosition())) return // 如果攻击者的位置无法看到天空则无法触发效果
-            event.amount += if (!event.entity.level().isRaining && !event.entity.level().isThundering) {
-                0.5f + 0.75f * level
+            if (!event.entity.level().isRaining && !event.entity.level().isThundering) {
+                event.amount += 0.5f + 0.75f * level
             } else {
-                -0.6f * level
+                event.amount -= 0.6f * level
+                if (Math.random() < level * 0.03f) {
+                    // 设置天气为晴天
+                    (attacker.level() as ServerLevel).setWeatherParameters(1600, 0, false, false)
+                }
             }
         }
     }
@@ -45,8 +50,9 @@ object WeatherEnchantmentEventHandler {
                 event.amount += 0.8f * level + 0.2f
             } else {
                 event.amount -= 0.3f * level + 0.2f
-                if (Math.random() < 3 + level / 100) {
-                    attacker.level().setRainLevel(0.6f)
+                if (Math.random() < level * 0.03f) {
+                    // 设置天气为下雨天 持续半分钟
+                    (attacker.level() as ServerLevel).setWeatherParameters(0, 600, true, false)
                 }
             }
         }

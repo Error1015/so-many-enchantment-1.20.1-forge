@@ -20,7 +20,7 @@ public class EnchantmentInit {
     public static final String clearSkyLoveSong = "clear_sky_love_song";
     public static final String rainBlessing = "rain_blessing";
 
-    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse, magicProtection, rainBlessing);
+    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, piercing, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse, magicProtection, rainBlessing, clearSkyLoveSong);
 
     private static String defaultConfig;
 
