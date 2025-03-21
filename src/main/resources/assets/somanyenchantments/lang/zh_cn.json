@@ -36,5 +36,7 @@
   "enchantment.somanyenchantments.piercing_arrow": "符文：穿刺之箭",
   "enchantment.somanyenchantments.piercing_arrow.desc": "让箭矢可以无视敌方护甲，每级增加25%的护甲穿透。",
   "enchantment.somanyenchantments.speed_is_unbreakable": "唯快不破",
-  "enchantment.somanyenchantments.speed_is_unbreakable.desc": "增加攻击速度，忽视目标的无敌时间"
+  "enchantment.somanyenchantments.speed_is_unbreakable.desc": "增加攻击速度，忽视目标的无敌时间",
+  "enchantment.somanyenchantments.magic_bless": "魔法祝福",
+  "enchantment.somanyenchantments.magic_bless.desc": "攻击目标给予目标随机Debuff"
 }

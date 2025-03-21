@@ -23,6 +23,7 @@ object ModEnchantments {
     val blessSword by Enchantments.registerObject("bless_sword") { BlessSwordEnchantment }
     val breakMagic by Enchantments.registerObject(EnchantmentInit.breakMagic) { BreakMagicEnchantment }
     val SpeedIsUnbreakable by Enchantments.registerObject(EnchantmentInit.speedIsUnbreakable) { SpeedIsUnbreakableEnchantment }
+    val MagicBless by Enchantments.registerObject(EnchantmentInit.magicBless) { MagicBlessEnchantment }
 
     // 诅咒
     val Unpredictable by Enchantments.registerObject("unpredictable") { UnpredictableEnchantment }

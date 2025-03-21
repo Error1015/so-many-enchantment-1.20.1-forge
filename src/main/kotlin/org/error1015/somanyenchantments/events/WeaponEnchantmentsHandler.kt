@@ -1,5 +1,8 @@
 package org.error1015.somanyenchantments.events
 
+import net.minecraft.world.effect.MobEffectCategory
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobType
@@ -13,14 +16,12 @@ import net.minecraftforge.event.ItemAttributeModifierEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
-import org.error1015.somanyenchantments.enchantments.weapon.BlessSwordEnchantment
-import org.error1015.somanyenchantments.enchantments.weapon.BreakMagicEnchantment
-import org.error1015.somanyenchantments.enchantments.weapon.LifeStealEnchantment
-import org.error1015.somanyenchantments.enchantments.weapon.SpeedIsUnbreakableEnchantment
+import net.minecraftforge.registries.ForgeRegistries
+import org.error1015.somanyenchantments.enchantments.weapon.*
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
-import java.util.UUID
-import kotlin.contracts.ReturnsNotNull
+import java.util.*
+import kotlin.random.Random
 
 @Mod.EventBusSubscriber
 object WeaponEnchantmentsHandler {
@@ -109,8 +110,40 @@ object WeaponEnchantmentsHandler {
             if (level == 0) return
             if (event.slotType == EquipmentSlot.MAINHAND) {
                 event.addModifier(
-                    Attributes.ATTACK_SPEED, AttributeModifier(UUID.fromString("e6109481-134f-4c54-a535-29c3ae5c7a21"), "attackSpeed", 0.25 * level, AttributeModifier.Operation.MULTIPLY_BASE)
+                    Attributes.ATTACK_SPEED, AttributeModifier(UUID.fromString("e6109481-134f-4c54-a535-29c3ae5c7a21"), "attackSpeed", 0.25 * level, AttributeModifier.Operation.MULTIPLY_TOTAL)
                 )
+            }
+        }
+    }
+
+    /**
+     * 魔法祝福
+     * 原来这个东西有些地方很麻烦 只做了给随机Debuff
+     */
+    @SubscribeEvent
+    fun doMagicBlessEvent(event: LivingDamageEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.source.entity is LivingEntity) {
+            val attacker = event.source.entity as LivingEntity
+            val target = event.entity ?: return
+            val level = attacker.mainHandItem.enchantmentLevel(MagicBlessEnchantment)
+            if (level == 0) return
+            // 获取已经注册的Debuff
+            val debuffs = ForgeRegistries.MOB_EFFECTS.asSequence().filter { it.category == MobEffectCategory.HARMFUL }.toList()
+            // 生成随机Debuff 持续时间和等级
+            val debuffIndex = Random.nextInt(0, debuffs.size)
+            val debuff = debuffs[debuffIndex]
+            val debuffDuration = Random.nextInt(20, 20 * level + 1)
+            val debuffLevel = Random.nextInt(1, level + 1)
+
+            // 如果目标是不死族且随机到的Debuff为瞬间伤害
+            if (target.mobType == MobType.UNDEAD && debuff == MobEffects.HARM) {
+                // 瞬间治疗给的持续时间不能太长
+                target.addEffect(MobEffectInstance(MobEffects.HEAL, 5, debuffLevel))
+            } else when (debuff) {
+                // 如果是瞬间伤害则时间给足够短
+                MobEffects.HARM -> target.addEffect(MobEffectInstance(debuff, 5, debuffLevel))
+                else -> target.addEffect(MobEffectInstance(debuff, debuffDuration, debuffLevel))
             }
         }
     }

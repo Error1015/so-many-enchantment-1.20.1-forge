@@ -21,27 +21,9 @@ public class EnchantmentInit {
     public static final String physicsProtection = "physic_protection";
     public static final String rottenCurse = "rotten_curse";
     public static final String speedIsUnbreakable = "speed_is_unbreakable";
+    public static final String magicBless = "magic_bless";
 
-    public static List<String> allEnchantments = List.of(
-            autoSmelt,
-            betterLoot,
-            purificationBlade,
-            frailtyCurse,
-            unpredictable,
-            revival,
-            blessSword,
-            lifeSteal,
-            betterLure,
-            betterFishLuck,
-            breakMagic,
-            sealedCurse,
-            magicProtection,
-            rainBlessing,
-            clearSkyLoveSong,
-            physicsProtection,
-            rottenCurse,
-            speedIsUnbreakable
-    );
+    public static List<String> allEnchantments = List.of(autoSmelt, betterLoot, purificationBlade, frailtyCurse, unpredictable, revival, blessSword, lifeSteal, betterLure, betterFishLuck, breakMagic, sealedCurse, magicProtection, rainBlessing, clearSkyLoveSong, physicsProtection, rottenCurse, speedIsUnbreakable, magicBless);
 
     private static String defaultConfig;
 
@@ -320,6 +302,22 @@ public class EnchantmentInit {
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":["minecraft:knockback","somanyenchantments:bless_word"]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case magicBless -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":false,
+                            "couldFound":true,
+                            "maxLevel":4,
+                            "quality":2,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
                         }
                     ]
                     """, enchantmentName);

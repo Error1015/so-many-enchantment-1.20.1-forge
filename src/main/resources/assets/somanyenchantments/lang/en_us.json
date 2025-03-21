@@ -36,5 +36,7 @@
   "enchantment.somanyenchantments.piercing_arrow": "Rune：Piercing Arrow",
   "enchantment.somanyenchantments.piercing_arrow.desc": "Allows arrows to ignore enemy armor, increasing armor penetration by 25% per level.",
   "enchantment.somanyenchantments.speed_is_unbreakable": "Speed Is Unbreakable",
-  "enchantment.somanyenchantments.speed_is_unbreakable.desc": "Increases attack speed and ignores the target's invincibility time"
+  "enchantment.somanyenchantments.speed_is_unbreakable.desc": "Increases attack speed and ignores the target's invincibility time",
+  "enchantment.somanyenchantments.magic_bless": "Magic Bless",
+  "enchantment.somanyenchantments.magic_bless.desc": "Giving the target a random Debuff"
 }
