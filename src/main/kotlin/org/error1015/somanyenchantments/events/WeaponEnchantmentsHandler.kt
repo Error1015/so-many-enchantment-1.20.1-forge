@@ -3,18 +3,24 @@ package org.error1015.somanyenchantments.events
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobType
+import net.minecraft.world.entity.ai.attributes.AttributeModifier
+import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.monster.Ravager
 import net.minecraft.world.entity.monster.Witch
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.SwordItem
+import net.minecraftforge.event.ItemAttributeModifierEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import org.error1015.somanyenchantments.enchantments.weapon.BlessSwordEnchantment
 import org.error1015.somanyenchantments.enchantments.weapon.BreakMagicEnchantment
 import org.error1015.somanyenchantments.enchantments.weapon.LifeStealEnchantment
+import org.error1015.somanyenchantments.enchantments.weapon.SpeedIsUnbreakableEnchantment
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
+import java.util.UUID
+import kotlin.contracts.ReturnsNotNull
 
 @Mod.EventBusSubscriber
 object WeaponEnchantmentsHandler {
@@ -72,6 +78,39 @@ object WeaponEnchantmentsHandler {
                 is Witch -> 1.5f * enchantmentLevel
                 is Ravager -> 1.5f * enchantmentLevel
                 else -> 0.625f * count * enchantmentLevel
+            }
+        }
+    }
+
+    /**
+     * 唯快不破
+     */
+    @SubscribeEvent
+    fun doSpeedIsUnbreakableEvent(event: LivingDamageEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.source.entity is LivingEntity) {
+            val attacker = event.source.entity as LivingEntity
+            val target = event.entity ?: return
+            val level = attacker.mainHandItem.enchantmentLevel(SpeedIsUnbreakableEnchantment)
+            if (level == 0) return
+            if (Math.random() < 0.01f * level + 0.25f) {
+                target.invulnerableTime = 23 - level * 3
+            }
+        }
+    }
+
+    /**
+     * 唯快不破为物品添加攻击速度
+     */
+    @SubscribeEvent
+    fun doAddAttackSpeedEvent(event: ItemAttributeModifierEvent) {
+        if (event.itemStack.isItemEnchanted(SpeedIsUnbreakableEnchantment)) {
+            val level = event.itemStack.enchantmentLevel(SpeedIsUnbreakableEnchantment)
+            if (level == 0) return
+            if (event.slotType == EquipmentSlot.MAINHAND) {
+                event.addModifier(
+                    Attributes.ATTACK_SPEED, AttributeModifier(UUID.fromString("e6109481-134f-4c54-a535-29c3ae5c7a21"), "attackSpeed", 0.25 * level, AttributeModifier.Operation.MULTIPLY_BASE)
+                )
             }
         }
     }

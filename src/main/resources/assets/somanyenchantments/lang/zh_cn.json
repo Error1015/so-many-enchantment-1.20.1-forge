@@ -1,6 +1,4 @@
 {
-  "enchantment.somanyenchantments.piercing": "符文: 穿刺",
-  "enchantment.somanyenchantments.piercing.desc": "每一级都会使你的攻击多25%转化为穿刺伤害",
   "enchantment.somanyenchantments.revival": "符文: 重铸",
   "enchantment.somanyenchantments.revival.desc": "当带有该附魔的工具耐久彻底耗尽后，有一定的概率使你获得一把完全一样的新工具",
   "enchantment.somanyenchantments.life_steal": "生命窃取",
@@ -36,5 +34,7 @@
   "enchantment.somanyenchantments.rotten_curse": "脆弱诅咒",
   "enchantment.somanyenchantments.rotten_curse.desc": "物品掉落在地上将会很快消失。",
   "enchantment.somanyenchantments.piercing_arrow": "符文：穿刺之箭",
-  "enchantment.somanyenchantments.piercing_arrow.desc": "让箭矢可以无视敌方护甲，每级增加25%的护甲穿透。"
+  "enchantment.somanyenchantments.piercing_arrow.desc": "让箭矢可以无视敌方护甲，每级增加25%的护甲穿透。",
+  "enchantment.somanyenchantments.speed_is_unbreakable": "唯快不破",
+  "enchantment.somanyenchantments.speed_is_unbreakable.desc": "增加攻击速度，忽视目标的无敌时间"
 }

@@ -1,6 +1,4 @@
 {
-  "enchantment.somanyenchantments.piercing": "Rune: Piercing",
-  "enchantment.somanyenchantments.piercing.desc": "Each level converts 25% more of your attacks into piercing damage",
   "enchantment.somanyenchantments.revival": "Rune: Revival",
   "enchantment.somanyenchantments.revival.desc": "When the tool with the enchantment is completely exhausted, there is a certain probability that you will get a new tool that is exactly the same",
   "enchantment.somanyenchantments.life_steal": "Life Steal",
@@ -36,5 +34,7 @@
   "enchantment.somanyenchantments.rotten_curse": "Rotten Curse",
   "enchantment.somanyenchantments.rotten_curse.desc": "Items will quickly disappear when dropped on the ground.",
   "enchantment.somanyenchantments.piercing_arrow": "Rune：Piercing Arrow",
-  "enchantment.somanyenchantments.piercing_arrow.desc": "Allows arrows to ignore enemy armor, increasing armor penetration by 25% per level."
+  "enchantment.somanyenchantments.piercing_arrow.desc": "Allows arrows to ignore enemy armor, increasing armor penetration by 25% per level.",
+  "enchantment.somanyenchantments.speed_is_unbreakable": "Speed Is Unbreakable",
+  "enchantment.somanyenchantments.speed_is_unbreakable.desc": "Increases attack speed and ignores the target's invincibility time"
 }

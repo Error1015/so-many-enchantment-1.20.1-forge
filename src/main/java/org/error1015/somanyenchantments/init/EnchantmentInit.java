@@ -20,6 +20,7 @@ public class EnchantmentInit {
     public static final String rainBlessing = "rain_blessing";
     public static final String physicsProtection = "physic_protection";
     public static final String rottenCurse = "rotten_curse";
+    public static final String speedIsUnbreakable = "speed_is_unbreakable";
 
     public static List<String> allEnchantments = List.of(
             autoSmelt,
@@ -38,7 +39,8 @@ public class EnchantmentInit {
             rainBlessing,
             clearSkyLoveSong,
             physicsProtection,
-            rottenCurse
+            rottenCurse,
+            speedIsUnbreakable
     );
 
     private static String defaultConfig;
@@ -302,6 +304,22 @@ public class EnchantmentInit {
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":[]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case speedIsUnbreakable -> defaultConfig = String.format("""
+                    [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":true,
+                            "couldFound":true,
+                            "maxLevel":5,
+                            "quality":3,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":["minecraft:knockback","somanyenchantments:bless_word"]
                         }
                     ]
                     """, enchantmentName);
