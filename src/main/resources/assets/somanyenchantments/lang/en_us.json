@@ -38,5 +38,9 @@
   "enchantment.somanyenchantments.speed_is_unbreakable": "Speed Is Unbreakable",
   "enchantment.somanyenchantments.speed_is_unbreakable.desc": "Increases attack speed and ignores the target's invincibility time",
   "enchantment.somanyenchantments.magic_bless": "Magic Bless",
-  "enchantment.somanyenchantments.magic_bless.desc": "Giving the target a random Debuff"
+  "enchantment.somanyenchantments.magic_bless.desc": "Giving the target a random Debuff",
+  "enchantment.somanyenchantments.dig_collect" : "Dig Collect",
+  "enchantment.somanyenchantments.dig_collect.desc" : "Non-block drops increase after digging",
+  "enchantment.somanyenchantments.hit_damage" : "Rune: Piercing",
+  "enchantment.somanyenchantments.hit_damage.desc" : "Adds extra piercing damage"
 }

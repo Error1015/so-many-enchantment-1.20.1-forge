@@ -70,7 +70,6 @@ object CurseEnchantmentHandler {
                 if (Math.random() < 0.1) {
                     val armors = mutableListOf<ItemStack>() // 目标的护甲List
                     target.armorSlots.forEach { armors.add(it) }
-                    // 获取所有已注册的诅咒附魔
                     // 检查是否有可用的诅咒和护甲
                     if (curses.isEmpty() || armors.isEmpty()) return
                     // 随机选择诅咒和护甲

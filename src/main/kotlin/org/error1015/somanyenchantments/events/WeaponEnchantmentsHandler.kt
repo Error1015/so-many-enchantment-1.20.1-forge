@@ -134,7 +134,7 @@ object WeaponEnchantmentsHandler {
             val debuffIndex = Random.nextInt(0, debuffs.size)
             val debuff = debuffs[debuffIndex]
             val debuffDuration = Random.nextInt(20, 20 * level + 1)
-            val debuffLevel = Random.nextInt(1, level + 1)
+            val debuffLevel = Random.nextInt(0, level) // level这个东西是从0开始数的
 
             // 如果目标是不死族且随机到的Debuff为瞬间伤害
             if (target.mobType == MobType.UNDEAD && debuff == MobEffects.HARM) {
