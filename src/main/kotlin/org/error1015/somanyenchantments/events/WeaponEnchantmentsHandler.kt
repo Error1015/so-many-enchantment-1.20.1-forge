@@ -97,6 +97,7 @@ object WeaponEnchantmentsHandler {
             val level = attacker.mainHandItem.enchantmentLevel(SpeedIsUnbreakableEnchantment)
             if (level == 0) return
             if (Math.random() < 0.01f * level + 0.25f) {
+                // 重置无敌时间
                 target.invulnerableTime = 23 - level * 3
             }
         }

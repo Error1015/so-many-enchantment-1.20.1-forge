@@ -32,18 +32,18 @@ var LivingEntity.boots: ItemStack
 /**
  * 获取ItemStack的指定附魔等级
  */
-fun ItemStack.enchantmentLevel(enchantment: Enchantment) = allEnchantments[enchantment] ?: 0
+infix fun ItemStack.enchantmentLevel(enchantment: Enchantment) = allEnchantments[enchantment] ?: 0
 
 /**
  * 如果ItemStack的所有附魔中包含指定附魔则返回true
  */
-fun ItemStack.isItemEnchanted(enchantment: Enchantment) = enchantment in allEnchantments
+infix fun ItemStack.isItemEnchanted(enchantment: Enchantment) = enchantment in allEnchantments
 
 /**
  * 给ItemStack添加附魔
  * @param value 添加附魔的键值对
  */
-fun ItemStack.addEnchantments(value: Pair<Enchantment, Int>) {
+infix fun ItemStack.addEnchantments(value: Pair<Enchantment, Int>) {
     val enchantments = EnchantmentHelper.getEnchantments(this)
     enchantments += value
     EnchantmentHelper.setEnchantments(enchantments, this)
@@ -52,7 +52,7 @@ fun ItemStack.addEnchantments(value: Pair<Enchantment, Int>) {
 /**
  * 获取玩家背包所有带有某个附魔的物品
  */
-fun Player.getItemFromEnchantment(enchantment: Enchantment) = inventory.items.asSequence().filter { it.isItemEnchanted(enchantment) }
+infix fun Player.getItemFromEnchantment(enchantment: Enchantment) = inventory.items.asSequence().filter { it.isItemEnchanted(enchantment) }
 
 /**
  * 获取玩家背包中所有附魔物品
@@ -62,7 +62,7 @@ fun Player.getAllEnchantmentItems() = inventory.items.asSequence().filter { it.i
 /**
  * 获取玩家护甲栏的所有装备的某一附魔等级总和
  */
-fun LivingEntity.getAllArmorsEnchantmentsTotalLevel(enchantment: Enchantment): Int {
+infix fun LivingEntity.getAllArmorsEnchantmentsTotalLevel(enchantment: Enchantment): Int {
     var level = 0
     armorSlots.asSequence().filter { it.isItemEnchanted(enchantment) }.forEach { level += it.enchantmentLevel(enchantment) }
     return level
