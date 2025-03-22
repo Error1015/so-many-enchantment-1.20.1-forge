@@ -1,6 +1,5 @@
 package org.error1015.somanyenchantments.utils
 
-import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.EquipmentSlot.*
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
@@ -30,22 +29,6 @@ var LivingEntity.boots: ItemStack
         setItemSlot(FEET, value)
     }
 
-/**
- * 获取实体的指定槽位物品的指定附魔等级
- * @param enchantment 附魔
- * @param slot 位置
- * @return 附魔等级 如果为null则返回0
- */
-fun LivingEntity.getItemEnchantmentLevel(enchantment: Enchantment, slot: EquipmentSlot): Int {
-    return when (slot) {
-        MAINHAND -> mainHandItem.allEnchantments[enchantment] ?: 0
-        OFFHAND -> offhandItem.allEnchantments[enchantment] ?: 0
-        HEAD -> helmet.allEnchantments[enchantment] ?: 0
-        CHEST -> chestplate.allEnchantments[enchantment] ?: 0
-        LEGS -> leggings.allEnchantments[enchantment] ?: 0
-        FEET -> boots.allEnchantments[enchantment] ?: 0
-    }
-}
 
 /**
  * 获取ItemStack的指定附魔等级
