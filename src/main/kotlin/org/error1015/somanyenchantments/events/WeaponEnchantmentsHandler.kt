@@ -112,7 +112,12 @@ object WeaponEnchantmentsHandler {
             if (level == 0) return
             if (event.slotType == EquipmentSlot.MAINHAND) {
                 event.addModifier(
-                    Attributes.ATTACK_SPEED, AttributeModifier(UUID.fromString("e6109481-134f-4c54-a535-29c3ae5c7a21"), "attackSpeed", 0.25 * level, AttributeModifier.Operation.MULTIPLY_TOTAL)
+                    Attributes.ATTACK_SPEED, AttributeModifier(
+                        UUID.fromString("e6109481-134f-4c54-a535-29c3ae5c7a21"),
+                        "attackSpeed",
+                        0.25 * level,
+                        AttributeModifier.Operation.MULTIPLY_TOTAL
+                    )
                 )
             }
         }
@@ -120,7 +125,6 @@ object WeaponEnchantmentsHandler {
 
     /**
      * 魔法祝福
-     * 原来这个东西有些地方很麻烦 只做了给随机Debuff
      */
     @SubscribeEvent
     fun doMagicBlessEvent(event: LivingDamageEvent) {

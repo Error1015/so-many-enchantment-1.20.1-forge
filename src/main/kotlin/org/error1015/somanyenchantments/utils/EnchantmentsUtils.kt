@@ -29,7 +29,6 @@ var LivingEntity.boots: ItemStack
         setItemSlot(FEET, value)
     }
 
-
 /**
  * 获取ItemStack的指定附魔等级
  */
@@ -39,11 +38,6 @@ fun ItemStack.enchantmentLevel(enchantment: Enchantment) = allEnchantments[encha
  * 如果ItemStack的所有附魔中包含指定附魔则返回true
  */
 fun ItemStack.isItemEnchanted(enchantment: Enchantment) = enchantment in allEnchantments
-
-/**
- * 如果ItemStack的所有附魔中包含任何附魔则返回true
- */
-fun ItemStack.isItemEnchanted() = allEnchantments.isNotEmpty()
 
 /**
  * 给ItemStack添加附魔
@@ -63,13 +57,12 @@ fun Player.getItemFromEnchantment(enchantment: Enchantment) = inventory.items.as
 /**
  * 获取玩家背包中所有附魔物品
  */
-fun Player.getAllEnchantmentItems() = inventory.items.asSequence().filter { it.isItemEnchanted() }
+fun Player.getAllEnchantmentItems() = inventory.items.asSequence().filter { it.isEnchanted }
 
 /**
  * 获取玩家护甲栏的所有装备的某一附魔等级总和
  */
 fun LivingEntity.getAllArmorsEnchantmentsTotalLevel(enchantment: Enchantment): Int {
-    if (armorSlots.all { it.isEmpty }) return 0
     var level = 0
     armorSlots.asSequence().filter { it.isItemEnchanted(enchantment) }.forEach { level += it.enchantmentLevel(enchantment) }
     return level
