@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
@@ -27,10 +28,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.error1015.somanyenchantments.enchantments.RegisterEnchantments;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 public class EventHandler {
     /**
@@ -43,50 +41,58 @@ public class EventHandler {
         if (player.isCreative()) return;
         // 检查是否持有 AutoSmelt 附魔的工具
         ItemStack heldItem = player.getMainHandItem();
-        if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) == 0) return;
-
         BlockState state = event.getState();
         Level world = event.getPlayer().level();
         BlockPos pos = event.getPos();
         List<ItemStack> originalDrops = Block.getDrops(state, (ServerLevel) world, pos, null, player, player.getMainHandItem());
-
-        // 替换可熔炼的物品
-        List<ItemStack> newDrops = new ArrayList<>();
-        for (ItemStack drop : originalDrops) {
-            Optional<ItemStack> oSmelted = getSmeltingResult(drop, world);
-            if (oSmelted.isPresent()) {
-                ItemStack smelted = oSmelted.get();
-                if (!smelted.isEmpty()) {
-                    int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE, player);
-                    double a = fortune + 2;
-                    double rn = Math.random();
-                    if (rn >= 1 / a) {
-                        int b = (int) (rn * (fortune + 1));
-                        for (int i = 0; i < b; i++) {
-                            newDrops.add(smelted.copy());
+        if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) != 0) {
+            // 替换可熔炼的物品
+            List<ItemStack> newDrops = new ArrayList<>();
+            for (ItemStack drop : originalDrops) {
+                Optional<ItemStack> oSmelted = getSmeltingResult(drop, world);
+                if (oSmelted.isPresent()) {
+                    ItemStack smelted = oSmelted.get();
+                    if (!smelted.isEmpty()) {
+                        int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE, player);
+                        double a = fortune + 2;
+                        double rn = Math.random();
+                        if (rn >= 1 / a) {
+                            int b = (int) (rn * (fortune + 1));
+                            for (int i = 0; i < b; i++) {
+                                newDrops.add(smelted.copy());
+                            }
                         }
+                        newDrops.add(smelted.copy());
+                    } else {
+                        newDrops.add(drop);
                     }
-                    newDrops.add(smelted.copy());
                 } else {
                     newDrops.add(drop);
                 }
-            } else {
-                newDrops.add(drop);
+            }
+            // 清除原掉落物并手动添加新掉落物
+            world.destroyBlock(pos, false); // 防止原掉落物生成
+            for (ItemStack stack : newDrops) {
+                if (!stack.isEmpty()) {
+                    // 创建物品实体并添加到世界
+                    ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack);
+                    world.addFreshEntity(itemEntity);
+                }
+            }
+
+            // 确保方块被破坏
+            world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11); // 11 是破坏方块的 Flag
+        }
+        if (player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()) != 0) {
+            for(ItemStack itemStack : originalDrops) {
+                if(!(itemStack.getItem() instanceof BlockItem)) {
+                    ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, itemStack);
+                    for (int i = 0; i < player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()); i++) {
+                        world.addFreshEntity(itemEntity.copy());
+                    }
+                }
             }
         }
-
-        // 清除原掉落物并手动添加新掉落物
-        world.destroyBlock(pos, false); // 防止原掉落物生成
-        for (ItemStack stack : newDrops) {
-            if (!stack.isEmpty()) {
-                // 创建物品实体并添加到世界
-                ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack);
-                world.addFreshEntity(itemEntity);
-            }
-        }
-
-        // 确保方块被破坏
-        world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11); // 11 是破坏方块的 Flag
     }
 
     /**
@@ -123,6 +129,26 @@ public class EventHandler {
             return;
         }
         applyPurificationBladeEffect(targetedEntity, level, damageSource, attacker, event);
+    }
+
+    /**
+     * 符文穿刺
+     */
+    @SubscribeEvent
+    public void onLivingHurt(LivingHurtEvent event) {
+        LivingEntity targetedEntity = event.getEntity();
+        Level level = targetedEntity.level();
+        DamageSource damageSource = event.getSource();
+        if (damageSource.getEntity() instanceof LivingEntity attacker) {
+            int hitLevel = attacker.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.HIT_DAMAGE.get());
+            if (hitLevel > 0) {
+                if (!(damageSource.is(DamageTypes.CACTUS))) {
+                    DamageSource hitDamage = new DamageSource(level.damageSources().cactus().typeHolder(), attacker);
+                    targetedEntity.invulnerableTime = 0;
+                    targetedEntity.hurt(hitDamage, event.getAmount() * hitLevel * 0.25f);
+                }
+            }
+        }
     }
 
     /**

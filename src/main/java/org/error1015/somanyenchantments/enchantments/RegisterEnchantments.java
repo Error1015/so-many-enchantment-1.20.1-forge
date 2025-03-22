@@ -8,7 +8,9 @@ import org.error1015.somanyenchantments.SoManyEnchantmentsKt;
 import org.error1015.somanyenchantments.enchantments.fish.BetterFishLuck;
 import org.error1015.somanyenchantments.enchantments.fish.BetterLure;
 import org.error1015.somanyenchantments.enchantments.tool.AutoSmelt;
+import org.error1015.somanyenchantments.enchantments.tool.DigCollect;
 import org.error1015.somanyenchantments.enchantments.weapon.BetterLoot;
+import org.error1015.somanyenchantments.enchantments.weapon.HitDamage;
 import org.error1015.somanyenchantments.enchantments.weapon.PurificationBlade;
 import org.error1015.somanyenchantments.init.EnchantmentInit;
 
@@ -19,4 +21,6 @@ public class RegisterEnchantments {
     public static final RegistryObject<Enchantment> PURIFICATION_BLADE = REGISTRY.register(EnchantmentInit.purificationBlade, PurificationBlade::new);
     public static final RegistryObject<Enchantment> BETTER_LURE = REGISTRY.register(EnchantmentInit.betterLure, BetterLure::new);
     public static final RegistryObject<Enchantment> BETTER_FISH_LUCK = REGISTRY.register(EnchantmentInit.betterFishLuck, BetterFishLuck::new);
+    public static final RegistryObject<Enchantment> DIG_COLLECT = REGISTRY.register(EnchantmentInit.digCollect, DigCollect::new);
+    public static final RegistryObject<Enchantment> HIT_DAMAGE = REGISTRY.register(EnchantmentInit.hitDamage, HitDamage::new);
 }

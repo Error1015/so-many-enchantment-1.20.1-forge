@@ -38,5 +38,9 @@
   "enchantment.somanyenchantments.speed_is_unbreakable": "唯快不破",
   "enchantment.somanyenchantments.speed_is_unbreakable.desc": "增加攻击速度，忽视目标的无敌时间",
   "enchantment.somanyenchantments.magic_bless": "魔法祝福",
-  "enchantment.somanyenchantments.magic_bless.desc": "攻击目标给予目标随机Debuff"
+  "enchantment.somanyenchantments.magic_bless.desc": "攻击目标给予目标随机Debuff",
+  "enchantment.somanyenchantments.dig_collect" : "采集",
+  "enchantment.somanyenchantments.dig_collect.desc" : "挖掘后非方块掉落物增加",
+  "enchantment.somanyenchantments.hit_damage" : "符文:穿刺",
+  "enchantment.somanyenchantments.hit_damage.desc" : "增加额外穿刺伤害"
 }
