@@ -99,4 +99,25 @@ object CurseEnchantmentHandler {
             }
         }
     }
+
+    /**
+     * 魔法诅咒
+     */
+    @SubscribeEvent
+    fun doMagicCurseEvent(event: LivingAttackEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.source.entity is LivingEntity) {
+            val sourceEntity = event.source.entity as LivingEntity
+            val target = event.entity ?: return
+            // 如果攻击者任意护甲上有魔法诅咒
+            if (sourceEntity armorHasEnchantment MagicCurseEnchantment) {
+                val effect = target.randomDebuff
+                // 概率触发
+                if (Math.random() < 0.2) {
+                    target.removeEffect(effect.effect) // 移除目标的随机负面效果
+                    sourceEntity.addEffect(effect) // 把debuff转移到攻击者
+                }
+            }
+        }
+    }
 }
