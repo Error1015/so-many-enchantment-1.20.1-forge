@@ -67,3 +67,5 @@ infix fun LivingEntity.getAllArmorsEnchantmentsTotalLevel(enchantment: Enchantme
     armorSlots.asSequence().filter { it.isItemEnchanted(enchantment) }.forEach { level += it.enchantmentLevel(enchantment) }
     return level
 }
+
+infix fun LivingEntity.armorHasEnchantment(enchantment: Enchantment) = armorSlots.asSequence().any { it.isItemEnchanted(enchantment) }
