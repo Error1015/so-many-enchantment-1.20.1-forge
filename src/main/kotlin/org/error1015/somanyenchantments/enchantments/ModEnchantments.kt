@@ -15,6 +15,7 @@ import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModEnchantments {
     val Enchantments: DeferredRegister<Enchantment> = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MODID)
+
     // 工具
     val Revival by Enchantments.registerObject("revival") { RevivalEnchantment }
 
@@ -24,12 +25,14 @@ object ModEnchantments {
     val breakMagic by Enchantments.registerObject(EnchantmentInit.breakMagic) { BreakMagicEnchantment }
     val SpeedIsUnbreakable by Enchantments.registerObject(EnchantmentInit.speedIsUnbreakable) { SpeedIsUnbreakableEnchantment }
     val MagicBless by Enchantments.registerObject(EnchantmentInit.magicBless) { MagicBlessEnchantment }
+    val Antidote by Enchantments.registerObject(EnchantmentInit.antidote) { AntidoteEnchantment }
 
     // 诅咒
     val Unpredictable by Enchantments.registerObject("unpredictable") { UnpredictableEnchantment }
     val FrailtyCurse by Enchantments.registerObject("frailty_curse") { FrailtyCurseEnchantment }
     val SealedCurse by Enchantments.registerObject(EnchantmentInit.sealedCurse) { SealedCurseEnchantment }
     val RottenCurse by Enchantments.registerObject(EnchantmentInit.rottenCurse) { RottenCurseEnchantment }
+    val MagicCurse by Enchantments.registerObject(EnchantmentInit.magicCurse) { MagicCurseEnchantment }
 
     // 保护
     val MagicProtection by Enchantments.registerObject(EnchantmentInit.magicProtection) { MagicProtectionEnchantment }

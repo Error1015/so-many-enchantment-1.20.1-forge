@@ -13,6 +13,7 @@ import net.minecraft.world.entity.monster.Witch
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.SwordItem
 import net.minecraftforge.event.ItemAttributeModifierEvent
+import net.minecraftforge.event.entity.living.LivingAttackEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
@@ -20,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistries
 import org.error1015.somanyenchantments.enchantments.weapon.*
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
+import org.error1015.somanyenchantments.utils.randomDebuff
 import java.util.*
 import kotlin.random.Random
 
@@ -149,6 +151,24 @@ object WeaponEnchantmentsHandler {
                 // 如果是瞬间伤害则时间给足够短
                 MobEffects.HARM -> target.addEffect(MobEffectInstance(debuff, 5, debuffLevel))
                 else -> target.addEffect(MobEffectInstance(debuff, debuffDuration, debuffLevel))
+            }
+        }
+    }
+
+    /**
+     * 百毒不侵
+     */
+    @SubscribeEvent
+    fun doAntidoteEvent(event: LivingAttackEvent) {
+        if (event.entity.level().isClientSide) return
+        if (event.source.entity is LivingEntity) {
+            val attacker = event.source.entity as LivingEntity
+            val debuff = attacker.randomDebuff
+            if (attacker.mainHandItem isItemEnchanted AntidoteEnchantment) {
+                // 一定概率清除随机debuff
+                if (Math.random() < 0.2) {
+                    attacker.removeEffect(debuff.effect)
+                }
             }
         }
     }

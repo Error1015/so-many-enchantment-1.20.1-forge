@@ -42,5 +42,9 @@
   "enchantment.somanyenchantments.dig_collect" : "Dig Collect",
   "enchantment.somanyenchantments.dig_collect.desc" : "Non-block drops increase after digging",
   "enchantment.somanyenchantments.hit_damage" : "Rune: Piercing",
-  "enchantment.somanyenchantments.hit_damage.desc" : "Adds extra piercing damage"
+  "enchantment.somanyenchantments.hit_damage.desc" : "Adds extra piercing damage",
+  "enchantment.somanyenchantments.magic_curse" : "Magic Curse",
+  "enchantment.somanyenchantments.magic_curse.desc" : "Each attack has a probability of transferring the target's debuff to itself",
+  "enchantment.somanyenchantments.antidote" : "Antidote",
+  "enchantment.somanyenchantments.antidote.desc" : "Each attack has a probability of clearing its own debuff"
 }

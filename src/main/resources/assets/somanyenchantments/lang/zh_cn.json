@@ -42,5 +42,9 @@
   "enchantment.somanyenchantments.dig_collect" : "采集",
   "enchantment.somanyenchantments.dig_collect.desc" : "挖掘后非方块掉落物增加",
   "enchantment.somanyenchantments.hit_damage" : "符文:穿刺",
-  "enchantment.somanyenchantments.hit_damage.desc" : "增加额外穿刺伤害"
+  "enchantment.somanyenchantments.hit_damage.desc" : "增加额外穿刺伤害",
+  "enchantment.somanyenchantments.magic_curse" : "魔法诅咒",
+  "enchantment.somanyenchantments.magic_curse.desc" : "每次攻击都有概率把目标的debuff转移到自身",
+  "enchantment.somanyenchantments.antidote" : "百毒不侵",
+  "enchantment.somanyenchantments.antidote.desc" : "每次攻击都有概率清除自身的debuff"
 }

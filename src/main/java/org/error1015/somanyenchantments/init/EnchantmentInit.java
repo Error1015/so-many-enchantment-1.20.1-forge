@@ -24,6 +24,8 @@ public class EnchantmentInit {
     public static final String magicBless = "magic_bless";
     public static final String digCollect = "dig_collect";
     public static final String hitDamage = "hit_damage";
+    public static final String magicCurse = "magic_curse";
+    public static final String antidote = "antidote";
 
     public static List<String> allEnchantments = List.of(
             autoSmelt,
@@ -46,7 +48,10 @@ public class EnchantmentInit {
             speedIsUnbreakable,
             magicBless,
             digCollect,
-            hitDamage);
+            hitDamage,
+            magicCurse,
+            antidote
+    );
 
     private static String defaultConfig;
 
@@ -368,6 +373,37 @@ public class EnchantmentInit {
                             "maxLevel":4,
                             "quality":2,
                             "couldEnchantTable":ture,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
+                        }
+                    ]
+                    """, enchantmentName);
+            case magicCurse -> defaultConfig = String.format("""
+                     [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":false,
+                            "couldFound":true,
+                            "maxLevel":1,
+                            "quality":2,
+                            "couldEnchantTable":false,
+                            "couldAnvil":true,
+                            "couldTrade":true,
+                            "unableCompatibility":[]
+                        }
+                    ]
+                    """, enchantmentName);
+
+            case antidote -> defaultConfig = String.format("""
+                     [
+                        {
+                            "enchantmentName": "%s",
+                            "isTreasure":true,
+                            "couldFound":true,
+                            "maxLevel":1,
+                            "quality":2,
+                            "couldEnchantTable":false,
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":[]

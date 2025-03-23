@@ -12,13 +12,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
 import org.error1015.somanyenchantments.enchantments.curse.FrailtyCurseEnchantment
+import org.error1015.somanyenchantments.enchantments.curse.MagicCurseEnchantment
 import org.error1015.somanyenchantments.enchantments.curse.RottenCurseEnchantment
 import org.error1015.somanyenchantments.enchantments.curse.SealedCurseEnchantment
 import org.error1015.somanyenchantments.enchantments.curse.UnpredictableEnchantment
 import org.error1015.somanyenchantments.utils.addEnchantments
+import org.error1015.somanyenchantments.utils.armorHasEnchantment
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.getAllArmorsEnchantmentsTotalLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
+import org.error1015.somanyenchantments.utils.randomDebuff
 import kotlin.random.Random
 
 @Mod.EventBusSubscriber
