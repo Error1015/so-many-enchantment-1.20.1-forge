@@ -114,7 +114,7 @@ object CurseEnchantmentHandler {
             val target = event.entity ?: return
             // 如果攻击者任意护甲上有魔法诅咒
             if (sourceEntity armorHasEnchantment MagicCurseEnchantment) {
-                val effect = target.randomDebuff
+                val effect = target.randomDebuff ?: return
                 // 概率触发
                 if (Math.random() < 0.2) {
                     target.removeEffect(effect.effect) // 移除目标的随机负面效果

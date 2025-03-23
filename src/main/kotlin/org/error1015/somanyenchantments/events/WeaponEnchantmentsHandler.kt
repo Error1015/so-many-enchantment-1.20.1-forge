@@ -163,7 +163,7 @@ object WeaponEnchantmentsHandler {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity
-            val debuff = attacker.randomDebuff
+            val debuff = attacker.randomDebuff ?: return
             if (attacker.mainHandItem isItemEnchanted AntidoteEnchantment) {
                 // 一定概率清除随机debuff
                 if (Math.random() < 0.2) {
