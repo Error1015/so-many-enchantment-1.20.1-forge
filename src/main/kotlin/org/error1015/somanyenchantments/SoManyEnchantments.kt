@@ -2,6 +2,7 @@ package org.error1015.somanyenchantments
 
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
+import org.error1015.somanyenchantments.ModCreativeTab.Tab
 import org.error1015.somanyenchantments.config.EnchantmentsConfig
 import org.error1015.somanyenchantments.enchantments.ModEnchantments.Enchantments
 import org.error1015.somanyenchantments.enchantments.RegisterEnchantments
@@ -15,6 +16,7 @@ const val MODID = "somanyenchantments"
 object SoManyEnchantments {
     init {
         Enchantments.register(MOD_BUS)
+        Tab.register(MOD_BUS)
         RegisterEnchantments.REGISTRY.register(MOD_BUS)
         MinecraftForge.EVENT_BUS.register(EventHandler())
         EnchantmentInit.allEnchantments.forEach { enchantmentName -> EnchantmentsConfig.loadConfig(MODID, enchantmentName) }

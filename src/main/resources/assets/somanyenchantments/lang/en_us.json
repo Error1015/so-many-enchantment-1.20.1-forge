@@ -1,4 +1,5 @@
 {
+  "itemGroup.somanyenchantments.tab":  "SoManyEnchantments",
   "enchantment.somanyenchantments.revival": "Rune: Revival",
   "enchantment.somanyenchantments.revival.desc": "When the tool with the enchantment is completely exhausted, there is a certain probability that you will get a new tool that is exactly the same",
   "enchantment.somanyenchantments.life_steal": "Life Steal",
@@ -46,5 +47,5 @@
   "enchantment.somanyenchantments.magic_curse" : "Magic Curse",
   "enchantment.somanyenchantments.magic_curse.desc" : "Each attack has a probability of transferring the target's debuff to itself",
   "enchantment.somanyenchantments.antidote" : "Antidote",
-  "enchantment.somanyenchantments.antidote.desc" : "Each attack has a probability of clearing its own debuff"
+  "enchantment.somanyenchantments.antidote.desc" : "Each attack has a probability of clearing its own debuff",
 }

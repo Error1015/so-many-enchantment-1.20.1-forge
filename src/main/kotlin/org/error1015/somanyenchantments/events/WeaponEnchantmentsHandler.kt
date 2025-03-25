@@ -22,6 +22,7 @@ import org.error1015.somanyenchantments.enchantments.weapon.*
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
 import org.error1015.somanyenchantments.utils.randomDebuff
+import org.error1015.somanyenchantments.utils.toUUID
 import java.util.*
 import kotlin.random.Random
 
@@ -116,10 +117,7 @@ object WeaponEnchantmentsHandler {
             if (event.slotType == EquipmentSlot.MAINHAND) {
                 event.addModifier(
                     Attributes.ATTACK_SPEED, AttributeModifier(
-                        UUID.fromString("e6109481-134f-4c54-a535-29c3ae5c7a21"),
-                        "attackSpeed",
-                        0.25 * level,
-                        AttributeModifier.Operation.MULTIPLY_TOTAL
+                        "e6109481-134f-4c54-a535-29c3ae5c7a21".toUUID(), "attackSpeed", 0.25 * level, AttributeModifier.Operation.MULTIPLY_TOTAL
                     )
                 )
             }
@@ -137,20 +135,22 @@ object WeaponEnchantmentsHandler {
             val target = event.entity ?: return
             val level = attacker.mainHandItem.enchantmentLevel(MagicBlessEnchantment)
             if (level == 0) return
-            // 生成随机Debuff 持续时间和等级
-            val debuffIndex = Random.nextInt(0, debuffs.size)
-            val debuff = debuffs[debuffIndex]
-            val debuffDuration = Random.nextInt(20, 20 * level + 1)
-            val debuffLevel = Random.nextInt(0, level) // level这个东西是从0开始数的
+            if (Math.random() < 0.4) {
+                // 生成随机Debuff 持续时间和等级
+                val debuffIndex = Random.nextInt(0, debuffs.size)
+                val debuff = debuffs[debuffIndex]
+                val debuffDuration = Random.nextInt(20, 20 * level + 1)
+                val debuffLevel = Random.nextInt(0, level) // level这个东西是从0开始数的
 
-            // 如果目标是不死族且随机到的Debuff为瞬间伤害
-            if (target.mobType == MobType.UNDEAD && debuff == MobEffects.HARM) {
-                // 瞬间治疗给的持续时间不能太长
-                target.addEffect(MobEffectInstance(MobEffects.HEAL, 5, debuffLevel))
-            } else when (debuff) {
-                // 如果是瞬间伤害则时间给足够短
-                MobEffects.HARM -> target.addEffect(MobEffectInstance(debuff, 5, debuffLevel))
-                else -> target.addEffect(MobEffectInstance(debuff, debuffDuration, debuffLevel))
+                // 如果目标是亡灵生物且随机到的Debuff为瞬间伤害
+                if (target.mobType == MobType.UNDEAD && debuff == MobEffects.HARM) {
+                    // 瞬间治疗给的持续时间不能太长
+                    target.addEffect(MobEffectInstance(MobEffects.HEAL, 5, debuffLevel))
+                } else when (debuff) {
+                    // 如果是瞬间伤害则时间给足够短
+                    MobEffects.HARM -> target.addEffect(MobEffectInstance(debuff, 5, debuffLevel))
+                    else -> target.addEffect(MobEffectInstance(debuff, debuffDuration, debuffLevel))
+                }
             }
         }
     }
