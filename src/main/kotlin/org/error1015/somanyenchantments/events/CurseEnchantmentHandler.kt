@@ -37,8 +37,8 @@ object CurseEnchantmentHandler {
                 val level = player.mainHandItem.enchantmentLevel(UnpredictableEnchantment)
                 if (level == 0) return
                 val value = Random.nextFloat() + 1.25f * level * event.amount
-                // 46%的概率给目标回复血量 54%的概率给目标造成伤害
-                if (Math.random() <= 0.46) {
+                // 32%的概率给目标回复血量 68%的概率给目标造成伤害
+                if (Math.random() <= 0.32) {
                     event.entity.heal(value)
                     event.isCanceled = true
                 } else {
@@ -84,6 +84,8 @@ object CurseEnchantmentHandler {
                     val level = Random.nextInt(1, enchantment.maxLevel + 1)
                     // 添加附魔并应用到护甲
                     armor.addEnchantments(enchantment to level)
+                    // 成功后伤害攻击者
+                    attacker.hurt(attacker.damageSources().magic(), level * 4f)
                 }
             }
         }

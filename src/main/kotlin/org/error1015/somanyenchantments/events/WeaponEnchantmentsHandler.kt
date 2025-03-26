@@ -117,7 +117,7 @@ object WeaponEnchantmentsHandler {
             if (event.slotType == EquipmentSlot.MAINHAND) {
                 event.addModifier(
                     Attributes.ATTACK_SPEED, AttributeModifier(
-                        "e6109481-134f-4c54-a535-29c3ae5c7a21".toUUID(), "attackSpeed", 0.25 * level, AttributeModifier.Operation.MULTIPLY_TOTAL
+                        "e6109481-134f-4c54-a535-29c3ae5c7a21".toUUID(), "attackSpeed", 0.15 * level, AttributeModifier.Operation.MULTIPLY_TOTAL
                     )
                 )
             }

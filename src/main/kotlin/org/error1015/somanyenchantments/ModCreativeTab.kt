@@ -20,9 +20,7 @@ object ModCreativeTab {
             .builder()
             .icon { Items.ENCHANTED_BOOK.defaultInstance }
             .title(Component.translatable("itemGroup.somanyenchantments.tab"))
-            .displayItems { _, output ->
-                enchantmentItemStacks().forEach { output.accept(it) }
-            }
+            .displayItems { _, output -> enchantmentItemStacks().forEach { output.accept(it) } }
             .build()
     }
 
