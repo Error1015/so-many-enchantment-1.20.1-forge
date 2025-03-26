@@ -116,7 +116,7 @@ repositories {
 
 mixin {
     add sourceSets.main, "so_many_enchantment.refmap.json"
-    config 'so_many_enchantment.mixins.json'
+    config 'so_many_enchantment.json'
 }
 
 dependencies {
