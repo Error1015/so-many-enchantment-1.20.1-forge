@@ -19,11 +19,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
 import org.error1015.somanyenchantments.enchantments.weapon.*
+import org.error1015.somanyenchantments.utils.asUUID
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
 import org.error1015.somanyenchantments.utils.randomDebuff
-import org.error1015.somanyenchantments.utils.toUUID
-import java.util.*
 import kotlin.random.Random
 
 @Mod.EventBusSubscriber
@@ -117,7 +116,7 @@ object WeaponEnchantmentsHandler {
             if (event.slotType == EquipmentSlot.MAINHAND) {
                 event.addModifier(
                     Attributes.ATTACK_SPEED, AttributeModifier(
-                        "e6109481-134f-4c54-a535-29c3ae5c7a21".toUUID(), "attackSpeed", 0.15 * level, AttributeModifier.Operation.MULTIPLY_TOTAL
+                        "e6109481-134f-4c54-a535-29c3ae5c7a21".asUUID(), "attackSpeed", 0.15 * level, AttributeModifier.Operation.MULTIPLY_TOTAL
                     )
                 )
             }
@@ -138,7 +137,7 @@ object WeaponEnchantmentsHandler {
             if (Math.random() < 0.4) {
                 // 生成随机Debuff 持续时间和等级
                 val debuffIndex = Random.nextInt(0, debuffs.size)
-                val debuff = debuffs[debuffIndex]
+                val debuff = debuffs[debuffIndex] ?: return
                 val debuffDuration = Random.nextInt(20, 20 * level + 1)
                 val debuffLevel = Random.nextInt(0, level) // level这个东西是从0开始数的
 

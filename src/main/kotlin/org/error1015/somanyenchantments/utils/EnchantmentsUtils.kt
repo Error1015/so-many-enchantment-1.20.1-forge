@@ -1,33 +1,10 @@
 package org.error1015.somanyenchantments.utils
 
-import net.minecraft.world.entity.EquipmentSlot.*
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentHelper
-
-var LivingEntity.helmet: ItemStack
-    get() = getItemBySlot(HEAD)
-    set(value) = setItemSlot(HEAD, value)
-
-var LivingEntity.chestplate: ItemStack
-    get() = getItemBySlot(CHEST)
-    set(value) {
-        setItemSlot(CHEST, value)
-    }
-
-var LivingEntity.leggings: ItemStack
-    get() = getItemBySlot(LEGS)
-    set(value) {
-        setItemSlot(LEGS, value)
-    }
-
-var LivingEntity.boots: ItemStack
-    get() = getItemBySlot(FEET)
-    set(value) {
-        setItemSlot(FEET, value)
-    }
 
 /**
  * 获取ItemStack的指定附魔等级

@@ -9,10 +9,14 @@ import kotlin.random.Random
  * 从实体身上获取随机一个Debuff
  */
 val LivingEntity.randomDebuff: MobEffectInstance?
-    get() = if (debuffs.isNotEmpty()) debuffs[Random.nextInt(0, debuffs.size)] else null
+    get() = if (debuffs.isNotEmpty()) {
+        debuffs[Random.nextInt(0, debuffs.size)]
+    } else null
 
 /**
  * 从实体身上获取Debuff
  */
 val LivingEntity.debuffs: List<MobEffectInstance>
-    get() = if (activeEffects.isNotEmpty()) activeEffects.asSequence().filter { it.effect.category == MobEffectCategory.HARMFUL }.toList() else emptyList()
+    get() = if (activeEffects.isNotEmpty()) {
+        activeEffects.asSequence().filter { it.effect.category == MobEffectCategory.HARMFUL }.toList()
+    } else emptyList()

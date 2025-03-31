@@ -67,7 +67,7 @@ object CurseEnchantmentHandler {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is LivingEntity) {
             val attacker = event.source.entity as LivingEntity
-            val target = event.entity
+            val target = event.entity ?: return
             // 如果攻击者的主手物品有密封诅咒，则给目标装备一个随机诅咒
             if (attacker.mainHandItem.isItemEnchanted(SealedCurseEnchantment)) {
                 if (Math.random() < 0.1) {
@@ -79,7 +79,7 @@ object CurseEnchantmentHandler {
                     val curseIndex = Random.nextInt(0, curses.size)
                     val armorsIndex = Random.nextInt(0, armors.size)
                     val armor = armors[armorsIndex]
-                    val enchantment = curses[curseIndex]
+                    val enchantment = curses[curseIndex] ?: return
                     // 随机选择附魔等级
                     val level = Random.nextInt(1, enchantment.maxLevel + 1)
                     // 添加附魔并应用到护甲

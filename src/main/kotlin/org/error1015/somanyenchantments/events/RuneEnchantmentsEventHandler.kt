@@ -1,7 +1,6 @@
 package org.error1015.somanyenchantments.events
 
-import net.minecraft.world.entity.player.Player
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent
+import net.minecraftforge.event.level.BlockEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import org.error1015.somanyenchantments.enchantments.runeword.RevivalEnchantment
@@ -14,21 +13,23 @@ object RuneEnchantmentsEventHandler {
      * 符文: 重铸
      */
     @SubscribeEvent
-    fun doRevival(event: LivingEntityUseItemEvent) {
-        if (event.entity.level().isClientSide) return
-        if (event.entity is Player && event.item.isItemEnchanted(RevivalEnchantment)) {
-            val player = event.entity as Player
-            val level = event.item.enchantmentLevel(RevivalEnchantment)
+    fun doRevival(event: BlockEvent.BreakEvent) {
+        if (event.player.level().isClientSide) return
+        val player = event.player ?: return
+        val item = event.player.mainHandItem ?: return
+
+        if (item.isItemEnchanted(RevivalEnchantment)) {
+            val level = item.enchantmentLevel(RevivalEnchantment)
             if (level == 0) return
 
-            // 如果耐久值小于30,则有一定概率触发
-            if (event.item.maxDamage - event.item.damageValue < 30) {
-                val itemCopy = event.item.copy()
+            // 如果耐久值最大耐久的25%,则有一定概率触发
+            if (item.maxDamage - item.damageValue < item.maxDamage / 4) {
+                val itemCopy = item.copy() ?: return
                 val r = Math.random()
-                itemCopy.damageValue = event.item.maxDamage / 2
+                itemCopy.damageValue = item.maxDamage / 2
                 when {
                     r <= (1f + level) * 0.15f -> player.addItem(itemCopy)
-                    event.item.maxDamage < 1250 && r <= (1f + level) * 0.2f -> player.addItem(itemCopy)
+                    item.maxDamage < 1250 && r <= (1f + level) * 0.2f -> player.addItem(itemCopy)
                 }
             }
         }
