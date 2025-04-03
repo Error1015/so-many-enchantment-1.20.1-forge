@@ -357,7 +357,7 @@ public class EnchantmentInit {
                             "couldFound":true,
                             "maxLevel":3,
                             "quality":2,
-                            "couldEnchantTable":ture,
+                            "couldEnchantTable":true,
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":["minecraft:fortune", "somanyenchantment:auto_smelt"]
@@ -372,7 +372,7 @@ public class EnchantmentInit {
                             "couldFound":true,
                             "maxLevel":4,
                             "quality":2,
-                            "couldEnchantTable":ture,
+                            "couldEnchantTable":true,
                             "couldAnvil":true,
                             "couldTrade":true,
                             "unableCompatibility":[]
