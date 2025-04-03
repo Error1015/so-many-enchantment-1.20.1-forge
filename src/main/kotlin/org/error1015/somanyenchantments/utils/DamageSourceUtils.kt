@@ -6,5 +6,4 @@ import net.minecraft.world.damagesource.DamageTypes
 /**
  * 判断属于近战攻击的伤害源
  */
-fun DamageSource.isLivingEntityAttack(): Boolean =
-     type() == DamageTypes.MOB_ATTACK || type() == DamageTypes.PLAYER_ATTACK
+fun DamageSource.isLivingEntityAttack(): Boolean = this.`is`(DamageTypes.MOB_ATTACK) || this.`is`(DamageTypes.PLAYER_ATTACK)

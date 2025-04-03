@@ -41,7 +41,7 @@ object ProtectionEnchantmentEventHandler {
         if (event.source.isLivingEntityAttack()) {
             val target = event.entity ?: return
             val level = target.getAllArmorsEnchantmentsTotalLevel(PhysicsProtectionEnchantment)
-            if (level == 0) return
+            if (level <= 0) return
             event.amount -= level * 0.5f
         }
     }

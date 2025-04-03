@@ -1,6 +1,5 @@
 package org.error1015.somanyenchantments.enchantments.curse
 
-import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.SwordItem
 import net.minecraft.world.item.enchantment.EnchantmentCategory

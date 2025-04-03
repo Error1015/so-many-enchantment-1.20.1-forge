@@ -4,29 +4,20 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.enchantment.EnchantmentCategory
+import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraftforge.event.entity.EntityJoinLevelEvent
 import net.minecraftforge.event.entity.living.LivingAttackEvent
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
-import org.error1015.somanyenchantments.enchantments.curse.FrailtyCurseEnchantment
-import org.error1015.somanyenchantments.enchantments.curse.MagicCurseEnchantment
-import org.error1015.somanyenchantments.enchantments.curse.RottenCurseEnchantment
-import org.error1015.somanyenchantments.enchantments.curse.SealedCurseEnchantment
-import org.error1015.somanyenchantments.enchantments.curse.UnpredictableEnchantment
-import org.error1015.somanyenchantments.utils.addEnchantments
-import org.error1015.somanyenchantments.utils.armorHasEnchantment
-import org.error1015.somanyenchantments.utils.enchantmentLevel
-import org.error1015.somanyenchantments.utils.getAllArmorsEnchantmentsTotalLevel
-import org.error1015.somanyenchantments.utils.isItemEnchanted
-import org.error1015.somanyenchantments.utils.randomDebuff
+import org.error1015.somanyenchantments.enchantments.curse.*
+import org.error1015.somanyenchantments.utils.*
 import kotlin.random.Random
 
 @Mod.EventBusSubscriber
 object CurseEnchantmentHandler {
-    val curses = ForgeRegistries.ENCHANTMENTS.asSequence().filter { it.isCurse && it.category == EnchantmentCategory.ARMOR }.toList()
+    val curses = ForgeRegistries.ENCHANTMENTS.asSequence().filter { it.isCurse }.toList()
 
     @SubscribeEvent
     fun doUnpredictableEnchantmentEvent(event: LivingDamageEvent) {
@@ -70,21 +61,29 @@ object CurseEnchantmentHandler {
             val target = event.entity ?: return
             // 如果攻击者的主手物品有密封诅咒，则给目标装备一个随机诅咒
             if (attacker.mainHandItem.isItemEnchanted(SealedCurseEnchantment)) {
-                if (Math.random() < 0.1) {
-                    val armors = mutableListOf<ItemStack>() // 目标的护甲List
-                    target.armorSlots.forEach { armors.add(it) }
+                if (Random.nextDouble() < 0.2) {
+                    val armors = mutableListOf<ItemStack>()
+                    for (stack in target.armorSlots) {
+                        if (stack != null) armors.add(stack)
+                    }
                     // 检查是否有可用的诅咒和护甲
                     if (curses.isEmpty() || armors.isEmpty()) return
                     // 随机选择诅咒和护甲
-                    val curseIndex = Random.nextInt(0, curses.size)
                     val armorsIndex = Random.nextInt(0, armors.size)
                     val armor = armors[armorsIndex]
-                    val enchantment = curses[curseIndex] ?: return
-                    // 随机选择附魔等级
-                    val level = Random.nextInt(1, enchantment.maxLevel + 1)
-                    // 添加附魔并应用到护甲
-                    armor.addEnchantments(enchantment to level)
-                    // 成功后伤害攻击者
+                    var curseIndex = Random.nextInt(0, curses.size)
+                    var enchantment = curses[curseIndex] ?: return
+                    var level = Random.nextInt(1, enchantment.maxLevel + 1)
+                    val armorEnchantments = EnchantmentHelper.getEnchantments(armor).toMutableMap()
+                    val isEnchantmentCompatible = EnchantmentHelper.isEnchantmentCompatible(armorEnchantments.keys, enchantment)
+                    // 如果不兼容或者已经存在冲突附魔 则退出(太麻烦了重新生成)
+                    if (!enchantment.canEnchant(armor) || !isEnchantmentCompatible) {
+                        return
+                    }
+                    // 成功后设置附魔
+                    armorEnchantments[enchantment] = level
+                    EnchantmentHelper.setEnchantments(armorEnchantments, armor)
+                    // 伤害攻击者
                     attacker.hurt(attacker.damageSources().magic(), level * 4f)
                 }
             }

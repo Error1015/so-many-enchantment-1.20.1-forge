@@ -132,6 +132,7 @@ dependencies {
 //    runtimeOnly fg.deobf("curse.maven:jei-238222:6075247")
 //    runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:6237015") // 训练人偶
 //    runtimeOnly fg.deobf("curse.maven:selene-499980:6323374") // MoonLight Lib
+//    runtimeOnly fileTree("runtimeMods")
 }
 
 def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']

@@ -17,16 +17,6 @@ infix fun ItemStack.enchantmentLevel(enchantment: Enchantment) = allEnchantments
 infix fun ItemStack.isItemEnchanted(enchantment: Enchantment) = enchantment in allEnchantments
 
 /**
- * 给ItemStack添加附魔
- * @param value 添加附魔的键值对
- */
-infix fun ItemStack.addEnchantments(value: Pair<Enchantment, Int>) {
-    val enchantments = EnchantmentHelper.getEnchantments(this)
-    enchantments += value
-    EnchantmentHelper.setEnchantments(enchantments, this)
-}
-
-/**
  * 获取玩家背包所有带有某个附魔的物品
  */
 infix fun Player.getItemFromEnchantment(enchantment: Enchantment) = inventory.items.asSequence().filter { it.isItemEnchanted(enchantment) }

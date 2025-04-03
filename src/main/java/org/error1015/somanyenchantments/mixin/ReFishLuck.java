@@ -17,7 +17,6 @@ public abstract class ReFishLuck {
      */
     @Inject(method = "getFishingLuckBonus", at = @At("HEAD"), cancellable = true)
     private static void getFishingLuckBonus(ItemStack pStack, CallbackInfoReturnable<Integer> cir) {
-        // 如果物品附魔了高级海之眷顾
         if (EnchantmentsUtilsKt.isItemEnchanted(pStack, RegisterEnchantments.BETTER_FISH_LUCK.get())) {
             int enchantmentLevel = EnchantmentsUtilsKt.enchantmentLevel(pStack, RegisterEnchantments.BETTER_FISH_LUCK.get());
             cir.setReturnValue(enchantmentLevel * 3);
