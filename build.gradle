@@ -34,7 +34,6 @@ minecraft {
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
-        // REQUIRED for processResources to work in dev
         copyIdeResources = true
 
         client {
@@ -116,8 +115,8 @@ repositories {
 }
 
 mixin {
-    add sourceSets.main, "so_many_enchantment.refmap.json"
-    config 'so_many_enchantment.json'
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
 }
 
 dependencies {
