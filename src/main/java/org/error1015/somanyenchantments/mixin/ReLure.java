@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EnchantmentHelper.class)
-public class ReLure {
+public abstract class ReLure {
     /**
      * @author MCMostWolf
      * @reason 覆盖原版钓鱼速度
