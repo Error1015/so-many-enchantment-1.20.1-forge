@@ -18,6 +18,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
+import org.error1015.somanyenchantments.Config
 import org.error1015.somanyenchantments.enchantments.weapon.*
 import org.error1015.somanyenchantments.utils.asUUID
 import org.error1015.somanyenchantments.utils.enchantmentLevel
@@ -34,19 +35,20 @@ object WeaponEnchantmentsHandler {
         if (event.entity.level().isClientSide) return
         if (event.source.entity is Player) {
             val player = event.source.entity as Player
-            val mainHandItem = player.getItemBySlot(EquipmentSlot.MAINHAND)
+            val mainHandItem = player.getItemBySlot(EquipmentSlot.MAINHAND) ?: return
             if (mainHandItem.isItemEnchanted(LifeStealEnchantment)) {
                 val level = mainHandItem.enchantmentLevel(LifeStealEnchantment)
                 if (level == 0) return
-                // 当附魔等级为1级,恢复玩家造成伤害的5% 当附魔等级>1级则恢复玩家造成伤害的5%+等级*0.25
-                var healValue = when (level) {
+                val value = when (level) {
                     1 -> event.amount * 0.05f
-                    4 -> event.amount * 0.1f // 若凌的额外要求: 四级最高10%
-                    else -> event.amount * (0.05f + level * 0.25f)
+                    else -> (event.amount * 0.05f) + (level * Config.lifeSteal.get())
                 }
-                player.heal(healValue)
+                player.heal(value)
                 // 同时造成恢复伤害的2倍
-                event.amount *= 2f * healValue
+                val hurtValue = Config.lifeStealHurtTarget.get() ?: return
+                if (hurtValue != 0) {
+                    event.amount *= hurtValue * value
+                }
             }
         }
     }
@@ -116,7 +118,10 @@ object WeaponEnchantmentsHandler {
             if (event.slotType == EquipmentSlot.MAINHAND) {
                 event.addModifier(
                     Attributes.ATTACK_SPEED, AttributeModifier(
-                        "e6109481-134f-4c54-a535-29c3ae5c7a21".asUUID(), "attackSpeed", 0.15 * level, AttributeModifier.Operation.MULTIPLY_TOTAL
+                        "e6109481-134f-4c54-a535-29c3ae5c7a21".asUUID(),
+                        "attackSpeed",
+                        0.15 * level,
+                        AttributeModifier.Operation.MULTIPLY_TOTAL
                     )
                 )
             }
