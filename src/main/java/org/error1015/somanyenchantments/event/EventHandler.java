@@ -46,6 +46,9 @@ public class EventHandler {
         Level world = event.getPlayer().level();
         BlockPos pos = event.getPos();
         List<ItemStack> originalDrops = Block.getDrops(state, (ServerLevel) world, pos, null, player, player.getMainHandItem());
+        if (!heldItem.isCorrectToolForDrops(state)) {
+            return; // 工具无效，不执行
+        }
         if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) != 0) {
             // 替换可熔炼的物品
             List<ItemStack> newDrops = new ArrayList<>();
@@ -82,7 +85,7 @@ public class EventHandler {
             }
 
             // 确保方块被破坏
-            world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11); // 11 是破坏方块的 Flag
+            world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
         if (player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()) != 0) {
             for (ItemStack itemStack : originalDrops) {
