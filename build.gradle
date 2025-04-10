@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url = 'https://maven.minecraftforge.net/' }
         maven { url = 'https://repo.spongepowered.org/maven' } // 添加这个仓库
     }
     dependencies {
@@ -122,14 +121,17 @@ mixin {
 
 dependencies {
     minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
-
-    implementation "thedarkcolour:kotlinforforge:$kff_version"
-
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    implementation "thedarkcolour:kotlinforforge:$kff_version"
 
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:5423987")
     runtimeOnly fg.deobf("curse.maven:enchantment-descriptions-250419:5855251")
     runtimeOnly fg.deobf("curse.maven:jade-324717:6106101")
+    runtimeOnly fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
+    runtimeOnly fg.deobf("curse.maven:enigmatic-addons-1030121:6314286")
+    runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
+    runtimeOnly fg.deobf("curse.maven:curios-309927:6406027")
+    runtimeOnly fg.deobf("curse.maven:patchouli-306770:6164575")
 //    runtimeOnly fg.deobf("curse.maven:jei-238222:6075247")
 //    runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:6237015") // 训练人偶
 //    runtimeOnly fg.deobf("curse.maven:selene-499980:6323374") // MoonLight Lib
@@ -144,7 +146,6 @@ def replaceProperties = [minecraft_version: minecraft_version, minecraft_version
 processResources {
     inputs.properties replaceProperties
     replaceProperties.put 'project', project
-
     filesMatching(resourceTargets) {
         expand replaceProperties
     }
@@ -160,7 +161,7 @@ jar {
                     'Specification-Vendor'    : mod_authors,
                     'Specification-Version'   : "1",
                     'Implementation-Title'    : project.name,
-                    'Implementation-Version'  : project.jar.archiveVersion,
+                    'Implementation-Version'  : jar.archiveVersion,
                     'Implementation-Vendor'   : mod_authors,
                     'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                     "MixinConfigs"            : "so_many_enchantment.json"])

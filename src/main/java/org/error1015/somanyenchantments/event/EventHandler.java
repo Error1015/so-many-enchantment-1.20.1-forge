@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -84,10 +85,11 @@ public class EventHandler {
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 11); // 11 是破坏方块的 Flag
         }
         if (player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()) != 0) {
-            for(ItemStack itemStack : originalDrops) {
-                if(!(itemStack.getItem() instanceof BlockItem)) {
+            for (ItemStack itemStack : originalDrops) {
+                if (!(itemStack.getItem() instanceof BlockItem)) {
                     ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, itemStack);
-                    for (int i = 0; i < player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()); i++) {
+                    for (int i = 0; i < player.getMainHandItem()
+                            .getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()); i++) {
                         world.addFreshEntity(itemEntity.copy());
                     }
                 }
@@ -102,12 +104,14 @@ public class EventHandler {
     public void attackEntity(LootingLevelEvent event) {
         if (event.getDamageSource() != null) {
             if (event.getDamageSource().getEntity() instanceof LivingEntity livingEntity) {
-                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.BETTER_LOOT.get());
+                int betterLoot = livingEntity.getMainHandItem()
+                        .getEnchantmentLevel(RegisterEnchantments.BETTER_LOOT.get());
                 if (betterLoot > 0) {
                     event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
                 }
             } else if (event.getDamageSource().getDirectEntity() instanceof LivingEntity livingEntity) {
-                int betterLoot = livingEntity.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.BETTER_LOOT.get());
+                int betterLoot = livingEntity.getMainHandItem()
+                        .getEnchantmentLevel(RegisterEnchantments.BETTER_LOOT.get());
                 if (betterLoot > 0) {
                     event.setLootingLevel(event.getLootingLevel() + 3 + betterLoot * 2);
                 }
@@ -135,18 +139,15 @@ public class EventHandler {
      * 符文穿刺
      */
     @SubscribeEvent
-    public void onLivingHurt(LivingHurtEvent event) {
+    public void onLivingHurt(LivingDamageEvent event) {
         LivingEntity targetedEntity = event.getEntity();
         Level level = targetedEntity.level();
         DamageSource damageSource = event.getSource();
         if (damageSource.getEntity() instanceof LivingEntity attacker) {
             int hitLevel = attacker.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.HIT_DAMAGE.get());
             if (hitLevel > 0) {
-                if (!(damageSource.is(DamageTypes.CACTUS))) {
-                    DamageSource hitDamage = new DamageSource(level.damageSources().cactus().typeHolder(), attacker);
-                    targetedEntity.invulnerableTime = 0;
-                    targetedEntity.hurt(hitDamage, event.getAmount() * hitLevel * 0.25f);
-                }
+                targetedEntity.invulnerableTime = 0;
+                targetedEntity.hurt(level.damageSources().cactus(), event.getAmount() * hitLevel * 0.25f);
             }
         }
     }
@@ -154,7 +155,7 @@ public class EventHandler {
     /**
      * 获取攻击者
      * @param damageSource 伤害来源
-     * @return 造成伤害的实体
+`     * @return 造成伤害的实体
      */
     private LivingEntity getAttacker(DamageSource damageSource) {
         if (damageSource.getEntity() instanceof LivingEntity attacker) {
@@ -182,7 +183,8 @@ public class EventHandler {
 
             // 额外伤害
             targetedEntity.invulnerableTime = 0; // 确保无敌帧被重置
-            targetedEntity.hurt(level.damageSources().indirectMagic(attacker, attacker), purificationBladeLevel * 0.75f + 1.25f);
+            targetedEntity.hurt(level.damageSources()
+                    .indirectMagic(attacker, attacker), purificationBladeLevel * 0.75f + 1.25f);
 
             // 下一次攻击无视无敌帧
             targetedEntity.invulnerableTime = 0;
@@ -200,7 +202,6 @@ public class EventHandler {
      * 获取熔炼结果
      * @param input 输入物品
      * @param level Level
-     * @return Optional<ItemStack>
      */
     public static Optional<ItemStack> getSmeltingResult(ItemStack input, Level level) {
         RecipeManager recipeManager = level.getRecipeManager();

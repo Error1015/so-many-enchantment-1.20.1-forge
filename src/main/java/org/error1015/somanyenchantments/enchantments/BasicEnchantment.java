@@ -42,6 +42,7 @@ public class BasicEnchantment extends Enchantment {
     public boolean canEnchant(@NotNull ItemStack pStack) {
         return EnchantmentsConfig.couldAnvil(enchantName);
     }
+
     @Override
     public boolean checkCompatibility(@NotNull Enchantment pOther) {
         boolean result = true;
