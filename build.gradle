@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url = 'https://repo.spongepowered.org/maven' } // 添加这个仓库
+        maven { url = 'https://repo.spongepowered.org/maven' }
     }
     dependencies {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
@@ -121,7 +121,7 @@ mixin {
 
 dependencies {
     minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
-    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+//    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     implementation "thedarkcolour:kotlinforforge:$kff_version"
 
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:5423987")
@@ -132,7 +132,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:caelus-308989:5281700")
     runtimeOnly fg.deobf("curse.maven:curios-309927:6406027")
     runtimeOnly fg.deobf("curse.maven:patchouli-306770:6164575")
-//    runtimeOnly fg.deobf("curse.maven:jei-238222:6075247")
+    runtimeOnly fg.deobf("curse.maven:jei-238222:6075247")
 //    runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:6237015") // 训练人偶
 //    runtimeOnly fg.deobf("curse.maven:selene-499980:6323374") // MoonLight Lib
 //    runtimeOnly fileTree("runtimeMods")

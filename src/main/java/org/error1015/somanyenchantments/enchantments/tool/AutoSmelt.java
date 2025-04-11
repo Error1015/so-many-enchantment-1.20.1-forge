@@ -8,7 +8,6 @@ import org.error1015.somanyenchantments.enchantments.BasicEnchantment;
 import org.error1015.somanyenchantments.init.EnchantmentInit;
 import org.jetbrains.annotations.NotNull;
 
-
 public class AutoSmelt extends BasicEnchantment {
     public AutoSmelt(EquipmentSlot... slots) {
         super(EnchantmentCategory.DIGGER, slots, EnchantmentInit.autoSmelt);

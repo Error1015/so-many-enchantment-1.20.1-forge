@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "somanyenchantments.refmap.json",
   "mixins": [
-    "ReFishLuck",
-    "ReLure"
+    "EnchantmentHelperMixin"
   ],
   "client": [
   ],
