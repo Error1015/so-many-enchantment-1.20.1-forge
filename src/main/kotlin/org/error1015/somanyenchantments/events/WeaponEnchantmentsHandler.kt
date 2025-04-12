@@ -51,7 +51,7 @@ object WeaponEnchantmentsHandler {
                 }
             }
         }
-    }
+    }   
 
     @SubscribeEvent
     fun doBlessSwordEvent(event: LivingDamageEvent) {

@@ -121,7 +121,6 @@ mixin {
 
 dependencies {
     minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
-//    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     implementation "thedarkcolour:kotlinforforge:$kff_version"
 
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:5423987")
@@ -136,6 +135,7 @@ dependencies {
 //    runtimeOnly fg.deobf("curse.maven:mmmmmmmmmmmm-225738:6237015") // 训练人偶
 //    runtimeOnly fg.deobf("curse.maven:selene-499980:6323374") // MoonLight Lib
 //    runtimeOnly fileTree("runtimeMods")
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
 def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
@@ -143,16 +143,13 @@ def replaceProperties = [minecraft_version: minecraft_version, minecraft_version
                          forge_version    : forge_version, forge_version_range: forge_version_range,
                          mod_id           : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
                          mod_authors      : mod_authors, mod_description: mod_description]
+
 processResources {
     inputs.properties replaceProperties
     replaceProperties.put 'project', project
     filesMatching(resourceTargets) {
         expand replaceProperties
     }
-}
-
-compileKotlin {
-    kotlinOptions.jvmTarget = '17'
 }
 
 jar {
@@ -164,7 +161,7 @@ jar {
                     'Implementation-Version'  : jar.archiveVersion,
                     'Implementation-Vendor'   : mod_authors,
                     'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                    "MixinConfigs"            : "so_many_enchantment.json"])
+        ])
     }
 }
 

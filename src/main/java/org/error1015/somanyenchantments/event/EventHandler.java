@@ -28,7 +28,6 @@ import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.error1015.somanyenchantments.enchantments.RegisterEnchantments;
-
 import java.util.*;
 
 public class EventHandler {
@@ -43,12 +42,13 @@ public class EventHandler {
         // 检查是否持有 AutoSmelt 附魔的工具
         ItemStack heldItem = player.getMainHandItem();
         BlockState state = event.getState();
+        // 工具无效，不执行
+        if (!heldItem.isCorrectToolForDrops(state)) {
+            return;
+        }
         Level world = event.getPlayer().level();
         BlockPos pos = event.getPos();
         List<ItemStack> originalDrops = Block.getDrops(state, (ServerLevel) world, pos, null, player, player.getMainHandItem());
-        if (!heldItem.isCorrectToolForDrops(state)) {
-            return; // 工具无效，不执行
-        }
         if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) != 0) {
             // 替换可熔炼的物品
             List<ItemStack> newDrops = new ArrayList<>();
