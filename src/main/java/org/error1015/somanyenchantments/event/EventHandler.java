@@ -30,6 +30,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.error1015.somanyenchantments.damagesource.ModDamageTypes;
 import org.error1015.somanyenchantments.enchantments.RegisterEnchantments;
+
 import java.util.*;
 
 public class EventHandler {
@@ -146,12 +147,13 @@ public class EventHandler {
     @SubscribeEvent
     public void onLivingHurt(LivingDamageEvent event) {
         LivingEntity targetedEntity = event.getEntity();
-        if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-            int hitLevel = attacker.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.HIT_DAMAGE.get());
-            DamageSource hitSource = ModDamageTypes.getSourceFromResourceKey(attacker.level(), ModDamageTypes.HIT_DAMAGE);
+        if (event.getSource().getEntity() instanceof Player player) {
+            int hitLevel = player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.HIT_DAMAGE.get());
+            DamageSource hitSource = ModDamageTypes.getSourceFromResourceKey(player.level(), ModDamageTypes.HIT_DAMAGE);
             if (hitLevel > 0) {
                 targetedEntity.invulnerableTime = 0;
                 targetedEntity.hurt(hitSource, event.getAmount() * hitLevel * 0.25f);
+                targetedEntity.setLastHurtByPlayer(player);
             }
         }
     }
@@ -159,7 +161,7 @@ public class EventHandler {
     /**
      * 获取攻击者
      * @param damageSource 伤害来源
-`     * @return 造成伤害的实体
+    `     * @return 造成伤害的实体
      */
     private LivingEntity getAttacker(DamageSource damageSource) {
         if (damageSource.getEntity() instanceof LivingEntity attacker) {
