@@ -2,6 +2,7 @@ package org.error1015.somanyenchantments.event;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -27,6 +28,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.error1015.somanyenchantments.damagesource.ModDamageTypes;
 import org.error1015.somanyenchantments.enchantments.RegisterEnchantments;
 import java.util.*;
 
@@ -144,13 +146,12 @@ public class EventHandler {
     @SubscribeEvent
     public void onLivingHurt(LivingDamageEvent event) {
         LivingEntity targetedEntity = event.getEntity();
-        Level level = targetedEntity.level();
-        DamageSource damageSource = event.getSource();
-        if (damageSource.getEntity() instanceof LivingEntity attacker) {
+        if (event.getSource().getEntity() instanceof LivingEntity attacker) {
             int hitLevel = attacker.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.HIT_DAMAGE.get());
+            DamageSource hitSource = ModDamageTypes.getSourceFromResourceKey(attacker.level(), ModDamageTypes.HIT_DAMAGE);
             if (hitLevel > 0) {
                 targetedEntity.invulnerableTime = 0;
-                targetedEntity.hurt(level.damageSources().cactus(), event.getAmount() * hitLevel * 0.25f);
+                targetedEntity.hurt(hitSource, event.getAmount() * hitLevel * 0.25f);
             }
         }
     }

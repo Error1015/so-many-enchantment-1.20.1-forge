@@ -47,5 +47,7 @@
   "enchantment.somanyenchantments.magic_curse" : "Magic Curse",
   "enchantment.somanyenchantments.magic_curse.desc" : "Each attack has a probability of transferring the target's debuff to itself",
   "enchantment.somanyenchantments.antidote" : "Antidote",
-  "enchantment.somanyenchantments.antidote.desc" : "Each attack has a probability of clearing its own debuff"
+  "enchantment.somanyenchantments.antidote.desc" : "Each attack has a probability of clearing its own debuff",
+
+  "death.attack.hit_damage": "%1$s was pricked into a cactus."
 }

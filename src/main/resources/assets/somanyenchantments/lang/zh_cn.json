@@ -47,5 +47,6 @@
   "enchantment.somanyenchantments.magic_curse" : "魔法诅咒",
   "enchantment.somanyenchantments.magic_curse.desc" : "每次攻击都有概率把目标的debuff转移到自身",
   "enchantment.somanyenchantments.antidote" : "百毒不侵",
-  "enchantment.somanyenchantments.antidote.desc" : "每次攻击都有概率清除自身的debuff"
+  "enchantment.somanyenchantments.antidote.desc" : "每次攻击都有概率清除自身的debuff",
+  "death.attack.hit_damage": "%1$s 被刺成了仙人掌。"
 }
