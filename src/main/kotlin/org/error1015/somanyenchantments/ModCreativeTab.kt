@@ -6,36 +6,35 @@ import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.EnchantedBookItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.EnchantmentInstance
 import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.RegistryObject
 import org.error1015.somanyenchantments.enchantments.ModEnchantments
 import org.error1015.somanyenchantments.enchantments.RegisterEnchantments
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModCreativeTab {
     val ItemGroup: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID)
+    val EnchantedBooks: Collection<ItemStack>
+        get() = ModEnchantments.Enchantments.entries.mapToEnchantedBook() + RegisterEnchantments.REGISTRY.entries.mapToEnchantedBook()
 
-    val enchantmentsTab: CreativeModeTab by ItemGroup.registerObject("somanyenchantments_tab") {
+    val EnchantmentsTab: CreativeModeTab by ItemGroup.registerObject("somanyenchantments_tab") {
         CreativeModeTab
             .builder()
             .icon { Items.ENCHANTED_BOOK.defaultInstance }
             .title(Component.translatable("itemGroup.somanyenchantments.tab"))
-            .displayItems { _, output -> enchantmentItemStacks().forEach { output.accept(it) } }
+            .displayItems { _, output ->
+                output.acceptAll(EnchantedBooks)
+            }
             .build()
     }
 
-    internal fun enchantmentItemStacks(): List<ItemStack> {
-        val enchantmentsList = mutableListOf<ItemStack>()
-
-        ModEnchantments.Enchantments.entries.forEach {
-            val enchantments = EnchantedBookItem.createForEnchantment(EnchantmentInstance(it.get(), it.get().maxLevel))
-            enchantmentsList += enchantments
-        }
-
-        RegisterEnchantments.REGISTRY.entries.forEach {
-            val enchantments = EnchantedBookItem.createForEnchantment(EnchantmentInstance(it.get(), it.get().maxLevel))
-            enchantmentsList += enchantments
-        }
-        return enchantmentsList
+    private fun Collection<RegistryObject<Enchantment>>.mapToEnchantedBook() = map { registryObj ->
+        EnchantedBookItem.createForEnchantment(
+            EnchantmentInstance(
+                registryObj.get(), registryObj.get().maxLevel
+            )
+        )
     }
 }

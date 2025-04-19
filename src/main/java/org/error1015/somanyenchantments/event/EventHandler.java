@@ -2,7 +2,6 @@ package org.error1015.somanyenchantments.event;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -27,17 +26,18 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.error1015.somanyenchantments.damagesource.ModDamageTypes;
 import org.error1015.somanyenchantments.enchantments.RegisterEnchantments;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 public class EventHandler {
-    /**
-     * 自动冶炼
-     */
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
         if (player == null) return;
@@ -52,6 +52,9 @@ public class EventHandler {
         Level world = event.getPlayer().level();
         BlockPos pos = event.getPos();
         List<ItemStack> originalDrops = Block.getDrops(state, (ServerLevel) world, pos, null, player, player.getMainHandItem());
+        /*
+          自动冶炼
+         */
         if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) != 0) {
             // 替换可熔炼的物品
             List<ItemStack> newDrops = new ArrayList<>();
@@ -90,6 +93,9 @@ public class EventHandler {
             // 确保方块被破坏
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
+        /*
+        采集
+         */
         if (player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()) != 0) {
             for (ItemStack itemStack : originalDrops) {
                 if (!(itemStack.getItem() instanceof BlockItem)) {
@@ -147,13 +153,18 @@ public class EventHandler {
     @SubscribeEvent
     public void onLivingHurt(LivingDamageEvent event) {
         LivingEntity targetedEntity = event.getEntity();
-        if (event.getSource().getEntity() instanceof Player player) {
-            int hitLevel = player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.HIT_DAMAGE.get());
-            DamageSource hitSource = ModDamageTypes.getSourceFromResourceKey(player.level(), ModDamageTypes.HIT_DAMAGE);
+        if (event.getSource().getEntity() instanceof LivingEntity attacker) {
+            int hitLevel = attacker.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.HIT_DAMAGE.get());
+            DamageSource hitSource = ModDamageTypes.getSourceFromResourceKey(attacker.level(), ModDamageTypes.HIT_DAMAGE);
             if (hitLevel > 0) {
                 targetedEntity.invulnerableTime = 0;
                 targetedEntity.hurt(hitSource, event.getAmount() * hitLevel * 0.25f);
-                targetedEntity.setLastHurtByPlayer(player);
+
+                if (attacker instanceof Player playerAttacker) {
+                    targetedEntity.setLastHurtByPlayer(playerAttacker);
+                } else {
+                    targetedEntity.setLastHurtByMob(attacker);
+                }
             }
         }
     }
@@ -161,7 +172,7 @@ public class EventHandler {
     /**
      * 获取攻击者
      * @param damageSource 伤害来源
-    `     * @return 造成伤害的实体
+     * @return 造成伤害的实体
      */
     private LivingEntity getAttacker(DamageSource damageSource) {
         if (damageSource.getEntity() instanceof LivingEntity attacker) {

@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
 import org.error1015.somanyenchantments.enchantments.curse.*
 import org.error1015.somanyenchantments.utils.*
+import org.error1015.somanyenchantments.Config
 import kotlin.random.Random
 
 @Mod.EventBusSubscriber
@@ -99,7 +100,7 @@ object CurseEnchantmentHandler {
         if (event.entity is ItemEntity) {
             val itemEntity = event.entity as ItemEntity
             if (itemEntity.item.isItemEnchanted(RottenCurseEnchantment)) {
-                itemEntity.lifespan = 200 // 设置成10秒
+                itemEntity.lifespan = 20 * Config.rottenCurse.get()
             }
         }
     }
@@ -117,7 +118,7 @@ object CurseEnchantmentHandler {
             if (sourceEntity armorHasEnchantment MagicCurseEnchantment) {
                 val effect = target.randomDebuff ?: return
                 // 概率触发
-                if (Math.random() < 0.2) {
+                if (Math.random() > Config.magicCurseChance.get()) {
                     target.removeEffect(effect.effect) // 移除目标的随机负面效果
                     sourceEntity.addEffect(effect) // 把debuff转移到攻击者
                 }

@@ -18,12 +18,12 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.registries.ForgeRegistries
-import org.error1015.somanyenchantments.Config
 import org.error1015.somanyenchantments.enchantments.weapon.*
 import org.error1015.somanyenchantments.utils.asUUID
 import org.error1015.somanyenchantments.utils.enchantmentLevel
 import org.error1015.somanyenchantments.utils.isItemEnchanted
 import org.error1015.somanyenchantments.utils.randomDebuff
+import org.error1015.somanyenchantments.Config
 import kotlin.random.Random
 
 @Mod.EventBusSubscriber

@@ -1,6 +1,7 @@
 package org.error1015.somanyenchantments.events
 
 import net.minecraft.world.damagesource.DamageTypes
+import net.minecraft.world.level.GameRules
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
