@@ -46,16 +46,12 @@ public class EventHandler {
         ItemStack heldItem = player.getMainHandItem();
         BlockState state = event.getState();
         // 工具无效，不执行
-        if (!heldItem.isCorrectToolForDrops(state)) {
-            return;
-        }
+        if (!heldItem.isCorrectToolForDrops(state)) return;
         Level world = event.getPlayer().level();
         BlockPos pos = event.getPos();
         List<ItemStack> originalDrops = Block.getDrops(state, (ServerLevel) world, pos, null, player, player.getMainHandItem());
-        /*
-          自动冶炼
-         */
-        if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) != 0) {
+        // 自动冶炼
+        if (heldItem.getEnchantmentLevel(RegisterEnchantments.AUTO_SMELT.get()) > 0) {
             // 替换可熔炼的物品
             List<ItemStack> newDrops = new ArrayList<>();
             for (ItemStack drop : originalDrops) {
@@ -93,10 +89,8 @@ public class EventHandler {
             // 确保方块被破坏
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
         }
-        /*
-        采集
-         */
-        if (player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()) != 0) {
+        // 采集
+        if (player.getMainHandItem().getEnchantmentLevel(RegisterEnchantments.DIG_COLLECT.get()) > 0) {
             for (ItemStack itemStack : originalDrops) {
                 if (!(itemStack.getItem() instanceof BlockItem)) {
                     ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, itemStack);

@@ -15,26 +15,20 @@ import org.error1015.somanyenchantments.enchantments.RegisterEnchantments
 import thedarkcolour.kotlinforforge.forge.registerObject
 
 object ModCreativeTab {
-    val ItemGroup: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID)
+    val ModCreativeTabRegistries : DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID)
     val EnchantedBooks: Collection<ItemStack>
         get() = ModEnchantments.Enchantments.entries.mapToEnchantedBook() + RegisterEnchantments.REGISTRY.entries.mapToEnchantedBook()
 
-    val EnchantmentsTab: CreativeModeTab by ItemGroup.registerObject("somanyenchantments_tab") {
+    val EnchantmentsTab: CreativeModeTab by ModCreativeTabRegistries.registerObject("somanyenchantments_tab") {
         CreativeModeTab
             .builder()
             .icon { Items.ENCHANTED_BOOK.defaultInstance }
             .title(Component.translatable("itemGroup.somanyenchantments.tab"))
-            .displayItems { _, output ->
-                output.acceptAll(EnchantedBooks)
-            }
+            .displayItems { _, output -> output.acceptAll(EnchantedBooks) }
             .build()
     }
 
     private fun Collection<RegistryObject<Enchantment>>.mapToEnchantedBook() = map { registryObj ->
-        EnchantedBookItem.createForEnchantment(
-            EnchantmentInstance(
-                registryObj.get(), registryObj.get().maxLevel
-            )
-        )
+        EnchantedBookItem.createForEnchantment(EnchantmentInstance(registryObj.get(), registryObj.get().maxLevel))
     }
 }

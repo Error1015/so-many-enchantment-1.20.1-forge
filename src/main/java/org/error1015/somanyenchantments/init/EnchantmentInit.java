@@ -82,7 +82,7 @@ public class EnchantmentInit {
                             "couldEnchantTable":true,
                             "couldAnvil":true,
                             "couldTrade":true,
-                            "unableCompatibility":[]
+                            "unableCompatibility":["minecraft:looting"]
                         }
                     ]""", enchantmentName);
             case purificationBlade -> defaultConfig = String.format("""
